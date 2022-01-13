@@ -2,7 +2,7 @@ using ControleFinanceiro.BLL.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ControleFinanceiro.DAO.Mapping
+namespace ControleFinanceiro.DAL.Mapping
 {
     public class UserMap : IEntityTypeConfiguration<User>
     {
