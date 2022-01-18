@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ControleFinanceiro.DAL.Interfaces;
+using ControleFinanceiro.DAL.Repositories;
 
 namespace ControleFinanceiro.API
 {
@@ -44,6 +46,8 @@ namespace ControleFinanceiro.API
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 })
                 ;
+
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
