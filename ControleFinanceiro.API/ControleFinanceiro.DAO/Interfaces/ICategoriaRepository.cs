@@ -11,5 +11,9 @@ namespace ControleFinanceiro.DAL.Interfaces
     {
         new IQueryable<Categoria> GetAll();
         new Task<Categoria> GetById(int id);
+
+        IQueryable<Categoria> FiltrarCategoria(string termo);
     }
+
+
 }

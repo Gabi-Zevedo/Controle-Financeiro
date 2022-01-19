@@ -14,8 +14,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,6 +52,8 @@ import { UpdateCategoriaComponent } from './components/Categoria/update-categori
     MatSelectModule,
     MatGridListModule,
     MatDialogModule,
+    FormsModule,
+    MatAutocompleteModule
   ],
   providers: [TiposService, CategoriasService, HttpClientModule],
   bootstrap: [AppComponent],

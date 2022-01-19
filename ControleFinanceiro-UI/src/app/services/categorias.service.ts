@@ -41,4 +41,8 @@ export class CategoriasService {
     const apiURL = `${this.url}/${categoriaId}`;
     return this.http.delete<number>(apiURL, httpOptions);
   }
+  FiltrarCategorias(termo: string): Observable<Categoria[]>{
+    const apiURL = `${this.url}/filtrarCategorias/${termo}`;
+    return this.http.get<Categoria[]>(apiURL);
+  }
 }

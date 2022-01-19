@@ -1,27 +1,36 @@
-.CategoriasData{
+.CategoriasData {
   padding: 30px 30px 30px 30px;
 }
 
-.tabela{
+.tabela {
   width: 100%;
   padding-top: 30px;
 }
 
-.divCard{
-  padding: 60px;
+.divCard {
+  padding: 50px;
   width: 600px;
 }
 
-.mat-form-field.mat-form-field{
+.mat-form-field.mat-form-field {
   width: 500px;
 }
 
-.header{
+.header {
   padding-top: 30px;
   padding-bottom: 30px;
 }
 
-.titulo{
+.titulo {
   position: absolute;
   left: 5px;
+}
+
+.divAutoComplete {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.autoCompleteInput {
+  width: 500px;
 }

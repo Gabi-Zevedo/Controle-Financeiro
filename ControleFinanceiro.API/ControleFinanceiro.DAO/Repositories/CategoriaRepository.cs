@@ -13,9 +13,23 @@ namespace ControleFinanceiro.DAL.Repositories
     {
         private readonly Context _context;
 
-        public CategoriaRepository(Context context) : base (context)
+        public CategoriaRepository(Context context) : base(context)
         {
             _context = context;
+        }
+
+        public IQueryable<Categoria> FiltrarCategoria(string termo)
+        {
+            try
+            {
+                return _context.Categorias.Include(c => c.Tipo)
+                    .Where(c => c.Nome.Contains(termo));
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception($"Erro: {e.Message}");
+            }
         }
 
         public new IQueryable<Categoria> GetAll()
@@ -32,7 +46,7 @@ namespace ControleFinanceiro.DAL.Repositories
             }
         }
 
-        public async Task<Categoria> GetById(int id)
+        public new async Task<Categoria> GetById(int id)
         {
 
             try
