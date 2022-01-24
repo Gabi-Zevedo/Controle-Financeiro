@@ -1,4 +1,9 @@
-<div class="categoriasData">
+<div *ngIf="!categorias">
+  <mat-progress-bar mode="buffer"></mat-progress-bar>
+</div>
+
+
+<div class="categoriasData" >
   <div class="header">
     <mat-grid-list cols="2" rowHeight="50px">
       <mat-grid-tile>
@@ -11,7 +16,7 @@
           [routerLink]="['/categorias/adicionar']"
           routerLinkActive="router-link-active"
         >
-          Nova Categoria
+        <mat-icon>add_circle_outline</mat-icon> Nova Categoria
         </button>
       </mat-grid-tile>
     </mat-grid-list>
@@ -30,22 +35,30 @@
           [matAutocomplete]="auto"
         />
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let nome of nomesCategorias | async" [value]="nome">
-            {{nome}}
+          <mat-option
+            *ngFor="let nome of nomesCategorias | async"
+            [value]="nome"
+          >
+            {{ nome }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
     </form>
   </div>
 
-  <table mat-table [dataSource]="categorias" class="mat-elevation-z8 tabela">
+  <table *ngIf="categorias"
+    mat-table
+    matSort
+    [dataSource]="categorias"
+    class="mat-elevation-z8 tabela"
+  >
     <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef="">Nome</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Nome</th>
       <td mat-cell *matCellDef="let categoria">{{ categoria.nome }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="icone">
-      <th mat-header-cell *matHeaderCellDef="">Ícone</th>
+    <ng-container matColumnDef="icon">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Ícone</th>
       <td mat-cell *matCellDef="let categoria">
         <mat-icon>
           {{ categoria.icon }}
@@ -54,23 +67,24 @@
     </ng-container>
 
     <ng-container matColumnDef="tipo">
-      <th mat-header-cell *matHeaderCellDef="">Tipo</th>
+      <th mat-header-cell *matHeaderCellDef  >Tipo</th>
       <td mat-cell *matCellDef="let categoria">{{ categoria.tipo.nome }}</td>
     </ng-container>
 
     <ng-container matColumnDef="acoes">
-      <th mat-header-cell *matHeaderCellDef="">Ações</th>
+      <th mat-header-cell *matHeaderCellDef >Ações</th>
       <td mat-cell *matCellDef="let categoria">
         <button
-          mat-mini-fab
+          mat-icon-button
           color="primary"
           [routerLink]="['/categorias/atualizar/', categoria.categoriaId]"
           routerLinkActive="router-link-active"
         >
           <mat-icon>edit</mat-icon>
         </button>
+
         <button
-          mat-mini-fab
+          mat-icon-button
           color="warn"
           (click)="OpenDialog(categoria.categoriaId, categoria.nome)"
         >
@@ -79,7 +93,11 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColums"></tr>
-    <tr mat-header-row *matRowDef="let row; columns: displayedColums"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-header-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 15, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

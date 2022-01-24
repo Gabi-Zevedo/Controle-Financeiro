@@ -1,4 +1,4 @@
-.CategoriasData {
+.categoriasData {
   padding: 30px 30px 30px 30px;
 }
 
@@ -33,4 +33,23 @@
 
 .autoCompleteInput {
   width: 500px;
+}
+
+.mat-paginator {
+  display: flex;
+  justify-content: left;
+}
+
+.textErros{
+  font-weight: 900;
+  color: red;
+}
+
+.divErros{
+  padding: 20px;
+}
+
+.cardErros{
+  padding-top: 30px;
+  padding-bottom: 30px;
 }

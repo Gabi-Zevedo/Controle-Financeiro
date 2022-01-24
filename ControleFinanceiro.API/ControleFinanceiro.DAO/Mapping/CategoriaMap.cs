@@ -14,7 +14,7 @@ namespace ControleFinanceiro.DAL.Mapping
         {
             builder.HasKey(c => c.CategoriaId);
             builder.Property(c => c.Nome).IsRequired().HasMaxLength(50);
-            builder.Property(c => c.Icon).IsRequired().HasMaxLength(15);
+            builder.Property(c => c.Icon).IsRequired().HasMaxLength(30);
 
             builder.HasOne(c => c.Tipo).WithMany(c => c.Categorias).HasForeignKey(c => c.TipoId).IsRequired();
             builder.HasMany(c => c.Ganhos).WithOne(c => c.Categoria);

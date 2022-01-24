@@ -1,3 +1,4 @@
+import { FuncoesService } from './services/funcoes.service';
 import { CategoriasService } from './services/categorias.service';
 import { TiposService } from './services/tipos.service';
 
@@ -16,6 +17,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +32,9 @@ import {
   DialogDeleteCategoriasComponent,
 } from './components/Categoria/list-categorias/list-categorias.component';
 import { UpdateCategoriaComponent } from './components/Categoria/update-categoria/update-categoria.component';
+import { DialogDeleteFuncoesComponent, ListFuncoesComponent } from './components/Funcao/list-funcoes/list-funcoes.component';
+import { AddFuncoesComponent } from './components/Funcao/add-funcoes/add-funcoes.component';
+import { UpdateFuncoesComponent } from './components/Funcao/update-funcoes/update-funcoes.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +42,11 @@ import { UpdateCategoriaComponent } from './components/Categoria/update-categori
     ListCategoriasComponent,
     AddCategoriaComponent,
     UpdateCategoriaComponent,
-    DialogDeleteCategoriasComponent
+    DialogDeleteCategoriasComponent,
+    ListFuncoesComponent,
+    AddFuncoesComponent,
+    DialogDeleteFuncoesComponent,
+    UpdateFuncoesComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,9 +65,18 @@ import { UpdateCategoriaComponent } from './components/Categoria/update-categori
     MatGridListModule,
     MatDialogModule,
     FormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
   ],
-  providers: [TiposService, CategoriasService, HttpClientModule],
+  providers: [
+    TiposService,
+    CategoriasService,
+    FuncoesService,
+    HttpClientModule,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

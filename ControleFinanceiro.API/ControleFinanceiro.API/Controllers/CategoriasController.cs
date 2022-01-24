@@ -79,7 +79,7 @@ namespace ControleFinanceiro.API.Controllers
                     message = $"{categoria.Nome} inserido com sucesso"
                 });
             }
-            return BadRequest(ModelState);
+            return BadRequest(categoria);
         }
 
         // DELETE: api/Categorias/5
@@ -94,7 +94,7 @@ namespace ControleFinanceiro.API.Controllers
 
             await _categoriaRepository.Delete(id);
 
-            await _categoriaRepository.Update(categoria);
+            //await _categoriaRepository.Update(categoria);
             return Ok(new
             {
                 message = $"{categoria.Nome} excluido com sucesso"

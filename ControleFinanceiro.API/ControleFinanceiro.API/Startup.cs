@@ -16,6 +16,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using ControleFinanceiro.DAL.Interfaces;
 using ControleFinanceiro.DAL.Repositories;
+using FluentValidation;
+using ControleFinanceiro.API.Validators;
+using FluentValidation.AspNetCore;
+using ControleFinanceiro.API.ViewModels;
+using ControleFinanceiro.API.Extensions;
 
 namespace ControleFinanceiro.API
 {
@@ -34,12 +39,14 @@ namespace ControleFinanceiro.API
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("ConexaoDB")));
 
             services.AddIdentity<User, Funcao>().AddEntityFrameworkStores<Context>();
+            services.UserPasswordConfiguration();
 
             services.AddCors();
 
             services.AddSpaStaticFiles(dir => dir.RootPath = "ControleFinanceiro-UI");
 
             services.AddControllers()
+                .AddFluentValidation()
                 .AddJsonOptions(options => options.JsonSerializerOptions.IgnoreNullValues = true)
                 .AddNewtonsoftJson(options =>
                 {
@@ -49,6 +56,12 @@ namespace ControleFinanceiro.API
 
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<ITipoRepository, TipoRepository>();
+            services.AddScoped<IFuncaoRepository, FuncaoRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddTransient<IValidator<Categoria>, CategoriaValidator>();
+            services.AddTransient<IValidator<FuncaoViewModel>, FuncoesValidator>();
+            services.AddTransient<IValidator<RegistroViewModel>, RegistroValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

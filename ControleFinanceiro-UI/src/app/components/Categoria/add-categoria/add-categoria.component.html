@@ -1,3 +1,7 @@
+<div *ngIf="!form">
+  <mat-progress-bar mode="buffer"></mat-progress-bar>
+</div>
+
 <div class="divCard" *ngIf="form">
   <mat-card>
     <mat-card-header>
@@ -6,6 +10,23 @@
       </mat-card-title>
     </mat-card-header>
     <form [formGroup]="form" (ngSubmit)="submitCategoria()">
+
+      <div class="cardErros" *ngIf="erros.length>0">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Algo deu errado
+            </mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content class="divErros">
+            <h4 class="textErros" *ngFor="let erro of erros">
+              {{erro}}
+            </h4>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+
       <mat-card-content>
         <div>
           <mat-form-field>
@@ -15,7 +36,11 @@
               matInput
               formControlName="nome"
               placeholder="Digite o nome da categoria"
+              required
             />
+            <mat-error *ngIf="f.nome.touched && f.nome.invalid">
+              <sup>*</sup>Obrigatório
+            </mat-error>
           </mat-form-field>
         </div>
 
@@ -27,18 +52,27 @@
               matInput
               formControlName="icon"
               placeholder="Digite o codigo do ícone"
+              required
             />
+            <mat-error *ngIf="f.icon.touched && f.icon.invalid">
+              <sup>*</sup>Obrigatório
+            </mat-error>
           </mat-form-field>
         </div>
 
         <div>
           <mat-form-field>
             <mat-label>Selecione o Tipo</mat-label>
-            <mat-select formControlName="tipoId">
+            <mat-select formControlName="tipoId" required>
               <mat-option *ngFor="let tipo of tipos" [value]="tipo.tipoId">
                 {{ tipo.nome }}
               </mat-option>
             </mat-select>
+
+            <mat-error *ngIf="f.tipoId.touched && f.tipoId.invalid">
+              <sup>*</sup>Obrigatório
+            </mat-error>
+
           </mat-form-field>
         </div>
 
@@ -46,7 +80,7 @@
       <mat-divider></mat-divider>
       <mat-card-actions>
         <div>
-          <button type="submit" mat-stroked-button color="primary">Salvar</button>
+          <button type="submit" mat-stroked-button color="primary" [disabled]="form.invalid">Salvar</button>
           <button mat-stroked-button type="button"  (click)="retornar()">Voltar</button>
         </div>
       </mat-card-actions>

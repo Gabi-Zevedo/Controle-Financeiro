@@ -6,10 +6,10 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        <h3>Atualizar {{ categoriaName }}</h3>
+        <h3>Cadastro de Funções</h3>
       </mat-card-title>
     </mat-card-header>
-    <form [formGroup]="form" (ngSubmit)="submitCategoria()">
+    <form [formGroup]="form" (ngSubmit)="submitFuncao()">
       <div class="cardErros" *ngIf="erros.length > 0">
         <mat-card>
           <mat-card-header>
@@ -31,11 +31,11 @@
             <input
               type="text"
               matInput
-              formControlName="nome"
-              placeholder="Digite o nome da categoria"
+              formControlName="name"
+              placeholder="Digite o nome da função"
               required
             />
-            <mat-error *ngIf="f.nome.touched && f.nome.invalid">
+            <mat-error *ngIf="f.name.touched && f.name.invalid">
               <sup>*</sup>Obrigatório
             </mat-error>
           </mat-form-field>
@@ -43,41 +43,31 @@
 
         <div>
           <mat-form-field>
-            <mat-label>Ícone</mat-label>
+            <mat-label>Descrição</mat-label>
             <input
               type="text"
               matInput
-              formControlName="icon"
-              placeholder="Digite o codigo do ícone"
+              formControlName="descricao"
+              placeholder="Digite descrição"
               required
             />
-            <mat-error *ngIf="f.icon.touched && f.icon.invalid">
+            <mat-error *ngIf="f.descricao.touched && f.descricao.invalid">
               <sup>*</sup>Obrigatório
             </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div>
-          <mat-form-field>
-            <mat-label>Selecione o Tipo</mat-label>
-            <mat-select formControlName="tipoId" required>
-              <mat-option *ngFor="let tipo of tipos" [value]="tipo.tipoId">
-                {{ tipo.nome }}
-              </mat-option>
-            </mat-select>
-
-            <mat-error *ngIf="f.tipoId.touched && f.tipoId.invalid">
-              <sup>*</sup>Obrigatório
-            </mat-error>
-
           </mat-form-field>
         </div>
       </mat-card-content>
       <mat-divider></mat-divider>
       <mat-card-actions>
         <div>
-          <button type="submit" mat-stroked-button color="primary" [disabled]="form.invalid">
-            Atualizar
+          <button
+            type="submit"
+            mat-stroked-button
+            color="primary"
+            [disabled]="form.invalid"
+          >
+          <mat-icon>done</mat-icon>
+          Salvar
           </button>
           <button mat-stroked-button type="button" (click)="retornar()">
             Voltar
