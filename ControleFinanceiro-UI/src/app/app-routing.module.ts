@@ -6,6 +6,8 @@ import { AddCategoriaComponent } from './components/Categoria/add-categoria/add-
 import { ListCategoriasComponent } from './components/Categoria/list-categorias/list-categorias.component';
 import { AddFuncoesComponent } from './components/Funcao/add-funcoes/add-funcoes.component';
 import { UpdateFuncoesComponent } from './components/Funcao/update-funcoes/update-funcoes.component';
+import { RegistrarUserComponent } from './components/User/Registro/registrar-user/registrar-user.component';
+import { UserLoginComponent } from './components/User/Login/user-login/user-login.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,14 @@ const routes: Routes = [
   {
     path: 'funcoes/atualizar/:id',
     component: UpdateFuncoesComponent,
+  },
+  {
+    path: 'user/registrar',
+    component: RegistrarUserComponent,
+  },
+  {
+    path: 'user/login',
+    component: UserLoginComponent,
   },
 ];
 

@@ -14,7 +14,7 @@ namespace ControleFinanceiro.API.Validators
             RuleFor(u => u.UserName)
                 .NotNull().WithMessage("UserName Obrigatório")
                 .NotEmpty().WithMessage("UserName Obrigatório")
-                .MinimumLength(1).WithMessage("UserName Obrigatório")
+                .MinimumLength(4).WithMessage("UserName precisa ter 4 caracteres")
                 .MaximumLength(50).WithMessage("Use menos de 50 caracteres");
 
             RuleFor(u => u.CPF)
@@ -36,11 +36,11 @@ namespace ControleFinanceiro.API.Validators
             RuleFor(u => u.Email)
                 .NotNull().WithMessage("E-mail Obrigatório")
                 .NotEmpty().WithMessage("E-mail Obrigatório")
-                .MinimumLength(1).WithMessage("E-mail Obrigatório")
+                .MinimumLength(10).WithMessage("E-mail muito curto")
                 .MaximumLength(50).WithMessage("Use menos de 50 caracteres")
                 .EmailAddress().WithMessage("E-mail Inválido") ;
 
-            RuleFor(u => u.Email)
+            RuleFor(u => u.Senha)
                 .NotNull().WithMessage("Senha Obrigatória")
                 .NotEmpty().WithMessage("Senha Obrigatória")
                 .MinimumLength(6).WithMessage("Senha muito curta, use mais de 6 caracteres")

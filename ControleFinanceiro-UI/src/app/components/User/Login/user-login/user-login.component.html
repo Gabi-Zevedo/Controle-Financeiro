@@ -1,0 +1,99 @@
+<div class="userLogin" fxLayout="row" fxLayoutAlign="center end">
+  <div class="formDiv">
+    <h1>Login de Usuário</h1>
+
+    <mat-divider></mat-divider>
+
+    <!-- Div de Erros -->
+    <div class="cardErros" *ngIf="erros.length > 0">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Algo deu errado </mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content class="divErros">
+          <h4 class="textErros" *ngFor="let erro of erros">
+            {{ erro }}
+          </h4>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="form">
+      <form [formGroup]="form" (ngSubmit)="SubmmitUser()">
+        <div>
+          <mat-form-field>
+            <mat-label>e-mail</mat-label>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Digite o e-mail"
+              matInput
+              required
+              maxlength="50"
+              minlength="10"
+              [ngClass]="{'is-invalid': f.email.errors && f.email.touched}"
+            />
+            <mat-error *ngIf="f.email.errors?.required" class="invalid-feedback">
+              <sup>*</sup> Obrigatório
+            </mat-error>
+
+            <mat-error *ngIf="f.email.errors?.email" class="invalid-feedback">
+              <sup>*</sup> e-mail inválido
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <mat-label>Senha</mat-label>
+            <input
+              type="password"
+              formControlName="senha"
+              matInput
+              placeholder="Digite a Senha"
+              required
+              minlength="6"
+              maxlength="50"[ngClass]="{
+                'is-invalid': f.email.errors && f.email.touched
+              }"
+            />
+            <mat-error *ngIf="f.senha.errors?.required && f.senha.touched" class="invalid-feedback">
+              <sup>*</sup> Obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <br />
+        <mat-divider></mat-divider>
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          fxLayoutAlign="end center"
+          class="btn"
+        >
+          <div>
+            <button
+              type="submit"
+              mat-stroked-button
+              color="primary"
+              [disabled]="form.invalid"
+            >
+              Logar
+            </button>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              mat-stroked-button
+              color="accent"
+              routerLink="/user/registrar"
+            >
+              Não Tenho Conta
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

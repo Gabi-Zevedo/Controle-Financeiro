@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/Json',
+    'Authorization': `Bearer ${localStorage.getItem('Token')}`
   }),
 };
 
@@ -28,6 +29,8 @@ export class CategoriasService {
   }
 
   AddCategoria(categoriaId: number): Observable<any>{
+    console.log(localStorage.getItem('Token'));
+
     return this.http.post<Categoria>(this.url, categoriaId, httpOptions);
   }
 

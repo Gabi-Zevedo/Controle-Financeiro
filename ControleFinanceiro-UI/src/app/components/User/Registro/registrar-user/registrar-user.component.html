@@ -1,0 +1,259 @@
+<div fxLayout="row" fxLayoutAlign="center end" class="formRegistro">
+  <div class="formDiv">
+    <h1>Cadastro de Usuários</h1>
+    <mat-divider></mat-divider>
+
+    <div class="form">
+      <form [formGroup]="form" (ngSubmit)="submmitUser()">
+        <div fxLayout="row" fxLayoutGap="30px">
+          <div fxFlex="40" fxLayoutAlign="center end">
+            <div fxLayout="column">
+              <div class="divFoto">
+                <img
+                  id="foto"
+                  src="../../../../assets/semImagem.png"
+                  width="350"
+                  height="300"
+                />
+              </div>
+              <div fxLayoutAlign="center end">
+                <input
+                  hidden
+                  type="file"
+                  #fileInput
+                  name="foto"
+                  formControlName="foto"
+                  required
+                  (change)="SelecionarFoto($event)"
+                />
+                <br /><br /><br /><br />
+                <button
+                  type="button"
+                  mat-stroked-button
+                  color="primary"
+                  (click)="fileInput.click()"
+                >
+                  <mat-icon>add_a_photo</mat-icon>
+                  Adicionar Foto
+                </button>
+                <div *ngIf="f.foto.touched && f.foto.invalid">
+                  <sup>*</sup> Obrigatótio
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div fxFlex="60">
+            <div class="cardErros" *ngIf="erros.length > 0">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Algo deu errado </mat-card-title>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="divErros">
+                  <h4 class="textErros" *ngFor="let erro of erros">
+                    {{ erro }}
+                  </h4>
+                </mat-card-content>
+              </mat-card>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>UserName</mat-label>
+                <input
+                  type="text"
+                  formControlName="userName"
+                  matInput
+                  placeholder="Digite o UserName"
+                  required
+                  minlength="6"
+                  maxlength="50"
+                  [ngClass]="{
+                    'is-invalid': f.userName.errors && f.userName.touched
+                  }"
+                />
+
+                <mat-error class="invalid-feedback" *ngIf=" f.userName.errors?.required">
+                  <sup>*</sup> Obrigatótio
+                </mat-error>
+
+                <mat-error
+                  class="invalid-feedback" *ngIf=" f.userName.errors?.minlength"
+                >
+                  <sup>*</sup> Digite mais de 6 caracteres
+                </mat-error>
+
+                <mat-error
+                  class="invalid-feedback" *ngIf=" f.userName.errors?.maxlength"
+                >
+                  <sup>*</sup> UserName muito longo
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>CPF</mat-label>
+                <input
+                  type="text"
+                  formControlName="cpf"
+                  matInput
+                  placeholder="Digite o CPF"
+                  required
+                  minlength="1"
+                  maxlength="14"
+                  mask="000.000.000-00"
+                  [ngClass]="{
+                    'is-invalid': f.cpf.errors && f.cpf.touched
+                  }"
+                />
+
+                <mat-error class="invalid-feedback" *ngIf=" f.cpf.errors?.required">
+                  <sup>*</sup> Obrigatótio
+                </mat-error>
+
+                <mat-error class="invalid-feedback" *ngIf=" f.cpf.errors?.minlength">
+                  <sup>*</sup> Digite mais de 1 caracteres
+                </mat-error>
+
+                <mat-error class="invalid-feedback" *ngIf=" f.cpf.errors?.maxlength">
+                  <sup>*</sup> cpf muito longo
+                </mat-error>
+
+                <mat-error class="invalid-feedback" *ngIf=" f.cpf.errors?.mask">
+                  <sup>*</sup> cpf inválido
+                </mat-error>
+
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>Profissão</mat-label>
+                <input
+                  type="text"
+                  formControlName="profissao"
+                  matInput
+                  placeholder="Digite a Profissão"
+                  required
+                  minlength="1"
+                  maxlength="30"
+                  [ngClass]="{
+                    'is-invalid': f.profissao.errors && f.profissao.touched
+                  }"
+                />
+
+                <mat-error class="invalid-feedback" *ngIf=" f.profissao.errors?.required">
+                  <sup>*</sup> Obrigatótio
+                </mat-error>
+
+                <mat-error
+                  class="invalid-feedback" *ngIf=" f.profissao.errors?.minlength"
+                >
+                  <sup>*</sup> Digite mais de 1 caracteres
+                </mat-error>
+
+                <mat-error
+                  class="invalid-feedback" *ngIf=" f.profissao.errors?.maxlength"
+                >
+                  <sup>*</sup> profissão muito longa
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>e-mail</mat-label>
+                <input
+                  type="email"
+                  formControlName="email"
+                  matInput
+                  placeholder="Digite o e-mail"
+                  required
+                  minlength="10"
+                  maxlength="50"
+                  [ngClass]="{
+                    'is-invalid': f.email.errors && f.email.touched
+                  }"
+                />
+
+                <mat-error class="invalid-feedback" *ngIf=" f.email.errors?.required">
+                  <sup>*</sup> Obrigatótio
+                </mat-error>
+
+                <mat-error class="invalid-feedback" *ngIf=" f.email.errors?.maxlength">
+                  <sup>*</sup> e-mail muito longo
+                </mat-error>
+
+                <mat-error class="invalid-feedback" *ngIf=" f.email.errors?.email || f.email.errors?.minlength">
+                  <sup>*</sup> e-mail inválido
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field>
+                <mat-label>Senha</mat-label>
+                <input
+                  type="password"
+                  formControlName="senha"
+                  matInput
+                  placeholder="Digite a Senha"
+                  required
+                  minlength="6"
+                  maxlength="50"
+                  [ngClass]="{
+                    'is-invalid': f.senha.errors && f.senha.touched
+                  }"
+                />
+                <mat-error class="invalid-feedback" *ngIf=" f.senha.errors?.required">
+                  <sup>*</sup> Obrigatótio
+                </mat-error>
+
+                <mat-error class="invalid-feedback" *ngIf=" f.senha.errors?.minlength">
+                  <sup>*</sup> Senha muito curta
+                </mat-error>
+
+                <mat-error class="invalid-feedback" *ngIf=" f.senha.errors?.maxlength">
+                  <sup>*</sup> Senha muito longa
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <br />
+        <mat-divider> </mat-divider>
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          fxLayoutAlign="end center"
+          class="botoes"
+        >
+          <div>
+            <button
+              type="submit"
+              mat-stroked-button
+              color="primary"
+              [disabled]="form.invalid"
+            >
+              <mat-icon *ngIf="!form.invalid">check</mat-icon>
+              Salvar
+            </button>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              mat-stroked-button
+              color="accent"
+              routerLink="/user/login"
+            >
+              Já sou Cadastrado
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

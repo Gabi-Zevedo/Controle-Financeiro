@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +24,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NgxMaskModule} from "ngx-mask";
+import { JwtModule } from "@auth0/angular-jwt";
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -35,6 +39,13 @@ import { UpdateCategoriaComponent } from './components/Categoria/update-categori
 import { DialogDeleteFuncoesComponent, ListFuncoesComponent } from './components/Funcao/list-funcoes/list-funcoes.component';
 import { AddFuncoesComponent } from './components/Funcao/add-funcoes/add-funcoes.component';
 import { UpdateFuncoesComponent } from './components/Funcao/update-funcoes/update-funcoes.component';
+import { RegistrarUserComponent } from './components/User/Registro/registrar-user/registrar-user.component';
+import { UserLoginComponent } from './components/User/Login/user-login/user-login.component';
+
+export function GetUserToken(){
+  return localStorage.getItem("Token");
+}
+
 
 @NgModule({
   declarations: [
@@ -47,6 +58,8 @@ import { UpdateFuncoesComponent } from './components/Funcao/update-funcoes/updat
     AddFuncoesComponent,
     DialogDeleteFuncoesComponent,
     UpdateFuncoesComponent,
+    RegistrarUserComponent,
+    UserLoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +83,15 @@ import { UpdateFuncoesComponent } from './components/Funcao/update-funcoes/updat
     MatSortModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    FlexLayoutModule,
+    NgxMaskModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: GetUserToken,
+        allowedDomains: ['localhost:5000'],
+        disallowedRoutes: []
+      }
+    }),
   ],
   providers: [
     TiposService,

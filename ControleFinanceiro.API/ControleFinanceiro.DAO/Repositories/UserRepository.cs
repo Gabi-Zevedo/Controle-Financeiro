@@ -51,9 +51,37 @@ namespace ControleFinanceiro.DAL.Repositories
             }
         }
 
+        public async Task<User> GetByEmail(string email)
+        {
+
+            try
+            {
+                return await _userManager.FindByEmailAsync(email);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        public async Task<IList<string>> GetRoles(User user)
+        {
+
+            try
+            {
+                return await _userManager.GetRolesAsync(user);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
         public async Task<int> GetUsersNumber()
         {
-            
+
             try
             {
                 return await _context.User.CountAsync();
@@ -67,7 +95,7 @@ namespace ControleFinanceiro.DAL.Repositories
 
         public async Task UserLogin(User user, bool lembrar)
         {
-            
+
             try
             {
                 await _signInManager.SignInAsync(user, false);

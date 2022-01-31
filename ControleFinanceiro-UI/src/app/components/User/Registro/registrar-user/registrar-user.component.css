@@ -1,0 +1,41 @@
+.formDiv {
+  width: 900px;
+}
+
+.divFoto {
+  border-width: 1px;
+  border-color: grey;
+  border-style: solid;
+  height: 300px;
+  width: 350px;
+}
+
+.formRegistro {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.form {
+  padding-top: 50px;
+}
+
+.botoes {
+  padding-top: 30px;
+}
+.textErros {
+  font-weight: 900;
+  color: red;
+}
+
+.divErros {
+  padding: 20px;
+}
+
+.cardErros {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.mat-form-field.mat-form-field {
+  width: 500px;
+}

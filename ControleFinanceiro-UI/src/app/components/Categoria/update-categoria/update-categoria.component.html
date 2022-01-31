@@ -34,9 +34,13 @@
               formControlName="nome"
               placeholder="Digite o nome da categoria"
               required
+              [ngClass]="{'is-invalid': f.nome.errors && f.nome.touched}"
             />
-            <mat-error *ngIf="f.nome.touched && f.nome.invalid">
+            <mat-error class="invalid-feedback" *ngIf="f.nome.errors?.required">
               <sup>*</sup>Obrigatório
+            </mat-error>
+            <mat-error class="invalid-feedback" *ngIf="f.nome.errors?.maxlength">
+              <sup>*</sup>Nome muito grande
             </mat-error>
           </mat-form-field>
         </div>
@@ -50,9 +54,14 @@
               formControlName="icon"
               placeholder="Digite o codigo do ícone"
               required
+              [ngClass]="{'is-invalid': f.icon.errors && f.icon.touched}"
             />
-            <mat-error *ngIf="f.icon.touched && f.icon.invalid">
+            <mat-error class="invalid-feedback" *ngIf="f.icon.errors?.required">
               <sup>*</sup>Obrigatório
+            </mat-error>
+
+            <mat-error class="invalid-feedback" *ngIf="f.icon.errors?.maxlength">
+              <sup>*</sup>Nome muito grande
             </mat-error>
           </mat-form-field>
         </div>

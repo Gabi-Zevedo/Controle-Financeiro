@@ -21,6 +21,9 @@ using ControleFinanceiro.API.Validators;
 using FluentValidation.AspNetCore;
 using ControleFinanceiro.API.ViewModels;
 using ControleFinanceiro.API.Extensions;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ControleFinanceiro.API
 {
@@ -45,6 +48,30 @@ namespace ControleFinanceiro.API
 
             services.AddSpaStaticFiles(dir => dir.RootPath = "ControleFinanceiro-UI");
 
+
+
+            var key = Encoding.ASCII.GetBytes(Settings.Key);
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+
+                };
+            });
+
+
+
             services.AddControllers()
                 .AddFluentValidation()
                 .AddJsonOptions(options => options.JsonSerializerOptions.IgnoreNullValues = true)
@@ -62,6 +89,7 @@ namespace ControleFinanceiro.API
             services.AddTransient<IValidator<Categoria>, CategoriaValidator>();
             services.AddTransient<IValidator<FuncaoViewModel>, FuncoesValidator>();
             services.AddTransient<IValidator<RegistroViewModel>, RegistroValidator>();
+            services.AddTransient<IValidator<LoginViewModel>, LoginValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +103,8 @@ namespace ControleFinanceiro.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -11,6 +11,7 @@ using ControleFinanceiro.DAL.Interfaces;
 using System.IO;
 using ControleFinanceiro.API.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using ControleFinanceiro.API.Services;
 
 namespace ControleFinanceiro.API.Controllers
 {
@@ -80,7 +81,7 @@ namespace ControleFinanceiro.API.Controllers
                     PasswordHash = model.Senha,
                 };
 
-                if(await _userRepository.GetUsersNumber() > 0)
+                if (await _userRepository.GetUsersNumber() > 0)
                 {
                     userRole = "Usuario";
                 }
@@ -94,12 +95,15 @@ namespace ControleFinanceiro.API.Controllers
                 if (userCreated.Succeeded)
                 {
                     await _userRepository.AddUserRole(user, userRole);
+                    var token = TokenService.GenerateToken(user, userRole);
                     await _userRepository.UserLogin(user, false);
 
                     return Ok(new
                     {
                         loggedEmail = user.Email,
-                        userId = user.Id
+                        userId = user.Id,
+                        user = user.UserName,
+                        userToken = token
                     });
                 }
                 else
@@ -110,5 +114,40 @@ namespace ControleFinanceiro.API.Controllers
 
             return BadRequest(model);
         }
+
+        [HttpPost("UserLogin")]
+        public async Task<ActionResult> UserLogin(LoginViewModel model)
+        {
+            if (model == null)
+            {
+                return NotFound("Usuario ou Senha inválidos");
+            }
+
+            User user = await _userRepository.GetByEmail(model.Email);
+
+            if (user != null)
+            {
+                PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+                if (passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Senha) != PasswordVerificationResult.Failed)
+                {
+                    var userRole = await _userRepository.GetRoles(user);
+                    var token = TokenService.GenerateToken(user, userRole.First());
+                    await _userRepository.UserLogin(user, false);
+
+                    return Ok(new
+                    {
+                        loggedUser = user.Email,
+                        userId = user.Id,
+                        user = user.UserName,
+                        userToken = token
+                    });
+                }
+
+                return NotFound("Usuario ou Senha inválidos");
+            }
+
+            return NotFound("Usuario ou Senha inválidos");
+        }
+
     }
 }

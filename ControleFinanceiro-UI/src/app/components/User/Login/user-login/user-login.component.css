@@ -1,0 +1,30 @@
+.userLogin{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.mat-form-field.mat-form-field{
+  width: 500px;
+}
+
+.btn{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.form{
+  padding-top: 25px;
+}
+.textErros {
+  font-weight: 900;
+  color: red;
+}
+
+.divErros {
+  padding: 20px;
+}
+
+.cardErros {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}

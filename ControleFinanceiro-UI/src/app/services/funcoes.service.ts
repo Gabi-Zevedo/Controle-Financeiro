@@ -6,6 +6,7 @@ import { Funcao } from '../models/Funcao';
 const httpOptions = {
   headers: new HttpHeaders({
     'content-type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('Token')}`
   }),
 };
 

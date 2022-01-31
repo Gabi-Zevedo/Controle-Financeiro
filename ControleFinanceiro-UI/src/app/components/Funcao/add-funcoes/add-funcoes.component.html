@@ -34,8 +34,9 @@
               formControlName="name"
               placeholder="Digite o nome da função"
               required
+              [ngClass]="{'is-invalid': f.name.errors && f.name.touched}"
             />
-            <mat-error *ngIf="f.name.touched && f.name.invalid">
+            <mat-error class="invalid-feedback" *ngIf="f.name.errors?.required">
               <sup>*</sup>Obrigatório
             </mat-error>
           </mat-form-field>
@@ -50,8 +51,9 @@
               formControlName="descricao"
               placeholder="Digite descrição"
               required
+              [ngClass]="{'is-invalid': f.descricao.errors && f.descricao.touched}"
             />
-            <mat-error *ngIf="f.descricao.touched && f.descricao.invalid">
+            <mat-error class="invalid-feedback" *ngIf="f.descricao.errors?.required">
               <sup>*</sup>Obrigatório
             </mat-error>
           </mat-form-field>

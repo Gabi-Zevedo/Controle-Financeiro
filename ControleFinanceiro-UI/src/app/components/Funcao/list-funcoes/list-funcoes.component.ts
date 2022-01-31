@@ -24,7 +24,7 @@ export class ListFuncoesComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true })
   paginator: MatPaginator;
 
-  @ViewChild(MatSort, { static: true })
+  @ViewChild(MatSort, { static: false })
   sort: MatSort;
 
   constructor(

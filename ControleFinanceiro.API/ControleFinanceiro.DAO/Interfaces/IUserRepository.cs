@@ -14,6 +14,8 @@ namespace ControleFinanceiro.DAL.Interfaces
         Task<IdentityResult> CreateUser(User user, string senha);
         Task AddUserRole(User user, string funcao);
         Task UserLogin(User user, bool lembrar);
+        Task<User> GetByEmail(string email);
+        Task<IList<string>> GetRoles(User user);
 
     }
 }
