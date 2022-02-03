@@ -23,9 +23,12 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { NgxMaskModule} from "ngx-mask";
-import { JwtModule } from "@auth0/angular-jwt";
+import { NgxMaskModule } from 'ngx-mask';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,16 +39,23 @@ import {
   DialogDeleteCategoriasComponent,
 } from './components/Categoria/list-categorias/list-categorias.component';
 import { UpdateCategoriaComponent } from './components/Categoria/update-categoria/update-categoria.component';
-import { DialogDeleteFuncoesComponent, ListFuncoesComponent } from './components/Funcao/list-funcoes/list-funcoes.component';
+import {
+  DialogDeleteFuncoesComponent,
+  ListFuncoesComponent,
+} from './components/Funcao/list-funcoes/list-funcoes.component';
 import { AddFuncoesComponent } from './components/Funcao/add-funcoes/add-funcoes.component';
 import { UpdateFuncoesComponent } from './components/Funcao/update-funcoes/update-funcoes.component';
 import { RegistrarUserComponent } from './components/User/Registro/registrar-user/registrar-user.component';
 import { UserLoginComponent } from './components/User/Login/user-login/user-login.component';
+import { DashboardComponent } from './components/Dashboard/dashboard/dashboard.component';
+import { HeaderComponent } from './components/Dashboard/header/header.component';
+import { AddCartaoComponent } from './components/Cartao/add-cartao/add-cartao.component';
+import { ListCartaoComponent, DialogDeleteCartaoComponent } from './components/Cartao/list-cartao/list-cartao.component';
+import { UpdateCartaoComponent } from './components/Cartao/update-cartao/update-cartao.component';
 
-export function GetUserToken(){
-  return localStorage.getItem("Token");
+export function GetUserToken() {
+  return localStorage.getItem('Token');
 }
-
 
 @NgModule({
   declarations: [
@@ -60,6 +70,12 @@ export function GetUserToken(){
     UpdateFuncoesComponent,
     RegistrarUserComponent,
     UserLoginComponent,
+    DashboardComponent,
+    HeaderComponent,
+    AddCartaoComponent,
+    ListCartaoComponent,
+    UpdateCartaoComponent,
+    DialogDeleteCartaoComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,9 +105,12 @@ export function GetUserToken(){
       config: {
         tokenGetter: GetUserToken,
         allowedDomains: ['localhost:5000'],
-        disallowedRoutes: []
-      }
+        disallowedRoutes: [],
+      },
     }),
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
   ],
   providers: [
     TiposService,

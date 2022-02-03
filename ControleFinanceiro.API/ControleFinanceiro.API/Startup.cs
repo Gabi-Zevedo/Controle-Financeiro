@@ -85,11 +85,13 @@ namespace ControleFinanceiro.API
             services.AddScoped<ITipoRepository, TipoRepository>();
             services.AddScoped<IFuncaoRepository, FuncaoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICartaoRepository, CartaoRepository>();
 
             services.AddTransient<IValidator<Categoria>, CategoriaValidator>();
             services.AddTransient<IValidator<FuncaoViewModel>, FuncoesValidator>();
             services.AddTransient<IValidator<RegistroViewModel>, RegistroValidator>();
             services.AddTransient<IValidator<LoginViewModel>, LoginValidator>();
+            services.AddTransient<IValidator<Cartao>, CartaoValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

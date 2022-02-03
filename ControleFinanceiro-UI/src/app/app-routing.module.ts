@@ -1,3 +1,5 @@
+import { AuthGuardService } from './services/auth-guard.service';
+import { DashboardComponent } from './components/Dashboard/dashboard/dashboard.component';
 import { ListFuncoesComponent } from './components/Funcao/list-funcoes/list-funcoes.component';
 import { UpdateCategoriaComponent } from './components/Categoria/update-categoria/update-categoria.component';
 import { NgModule } from '@angular/core';
@@ -8,32 +10,55 @@ import { AddFuncoesComponent } from './components/Funcao/add-funcoes/add-funcoes
 import { UpdateFuncoesComponent } from './components/Funcao/update-funcoes/update-funcoes.component';
 import { RegistrarUserComponent } from './components/User/Registro/registrar-user/registrar-user.component';
 import { UserLoginComponent } from './components/User/Login/user-login/user-login.component';
+import { AddCartaoComponent } from './components/Cartao/add-cartao/add-cartao.component';
+import { ListCartaoComponent } from './components/Cartao/list-cartao/list-cartao.component';
+import { UpdateCartaoComponent } from './components/Cartao/update-cartao/update-cartao.component';
 
 const routes: Routes = [
   {
-    path: 'categorias/listagem',
-    component: ListCategoriasComponent,
+    path: '',
+    component: DashboardComponent,
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: 'categorias/listagem',
+        component: ListCategoriasComponent,
+      },
+      {
+        path: 'categorias/adicionar',
+        component: AddCategoriaComponent,
+      },
+      {
+        path: 'categorias/atualizar/:id',
+        component: UpdateCategoriaComponent,
+      },
+      {
+        path: 'funcoes/listagem',
+        component: ListFuncoesComponent,
+      },
+      {
+        path: 'funcoes/adicionar',
+        component: AddFuncoesComponent,
+      },
+      {
+        path: 'funcoes/atualizar/:id',
+        component: UpdateFuncoesComponent,
+      },
+      {
+        path: 'cartoes/adicionar',
+        component: AddCartaoComponent,
+      },
+      {
+        path: 'cartoes/listagem',
+        component: ListCartaoComponent,
+      },
+      {
+        path: 'cartoes/atualizar/:id',
+        component: UpdateCartaoComponent,
+      },
+    ],
   },
-  {
-    path: 'categorias/adicionar',
-    component: AddCategoriaComponent,
-  },
-  {
-    path: 'categorias/atualizar/:id',
-    component: UpdateCategoriaComponent,
-  },
-  {
-    path: 'funcoes/listagem',
-    component: ListFuncoesComponent,
-  },
-  {
-    path: 'funcoes/adicionar',
-    component: AddFuncoesComponent,
-  },
-  {
-    path: 'funcoes/atualizar/:id',
-    component: UpdateFuncoesComponent,
-  },
+
   {
     path: 'user/registrar',
     component: RegistrarUserComponent,

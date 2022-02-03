@@ -6,10 +6,10 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        <h3>Atualizar {{ categoriaName }}</h3>
+        <h3>Cadastro de Cartões</h3>
       </mat-card-title>
     </mat-card-header>
-    <form [formGroup]="form" (ngSubmit)="submitCategoria()">
+    <form [formGroup]="form" (ngSubmit)="submitCartao()">
       <div class="cardErros" *ngIf="erros.length > 0">
         <mat-card>
           <mat-card-header>
@@ -24,6 +24,7 @@
         </mat-card>
       </div>
 
+      <!-- campos de cadastro -->
       <mat-card-content>
         <div>
           <mat-form-field>
@@ -32,64 +33,100 @@
               type="text"
               matInput
               formControlName="nome"
-              placeholder="Digite o nome da categoria"
+              placeholder="Digite o nome do cartão"
               required
               [ngClass]="{ 'is-invalid': f.nome.errors && f.nome.touched }"
             />
             <mat-error class="invalid-feedback" *ngIf="f.nome.errors?.required">
               <sup>*</sup>Obrigatório
             </mat-error>
-            <mat-error
-              class="invalid-feedback"
-              *ngIf="f.nome.errors?.maxlength"
-            >
-              <sup>*</sup>Nome muito grande
-            </mat-error>
           </mat-form-field>
         </div>
 
         <div>
           <mat-form-field>
-            <mat-label>Ícone</mat-label>
+            <mat-label>Bandeira</mat-label>
             <input
               type="text"
               matInput
-              formControlName="icon"
-              placeholder="Digite o codigo do ícone"
+              formControlName="bandeira"
+              placeholder="Digite a bandeira"
               required
-              [ngClass]="{ 'is-invalid': f.icon.errors && f.icon.touched }"
+              [ngClass]="{
+                'is-invalid': f.bandeira.errors && f.bandeira.touched
+              }"
             />
-            <mat-error class="invalid-feedback" *ngIf="f.icon.errors?.required">
-              <sup>*</sup>Obrigatório
-            </mat-error>
-
             <mat-error
               class="invalid-feedback"
-              *ngIf="f.icon.errors?.maxlength"
+              *ngIf="f.bandeira.errors?.required"
             >
-              <sup>*</sup>Nome muito grande
+              <sup>*</sup>Obrigatório
+            </mat-error>
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.bandeira.errors?.maxLength"
+            >
+              <sup>*</sup>Digite um nome menor
             </mat-error>
           </mat-form-field>
         </div>
 
         <div>
           <mat-form-field>
-            <mat-label>Selecione o Tipo</mat-label>
-            <mat-select formControlName="tipoId" required>
-              <mat-option *ngFor="let tipo of tipos" [value]="tipo.tipoId">
-                {{ tipo.nome }}
-              </mat-option>
-            </mat-select>
+            <mat-label>Número do Cartão</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="numero"
+              placeholder="Digite o número do cartão"
+              required
+              mask = "0000 0000 0000 0000"
+              [ngClass]="{
+                'is-invalid': f.numero.errors && f.numero.touched
+              }"
+            />
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.numero.errors?.required"
+            >
+              <sup>*</sup>Obrigatório
+            </mat-error>
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.numero.errors?.maxLength || f.numero.errors?.mask"
+            >
+              <sup>*</sup>Número Inválido
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-            <mat-error *ngIf="f.tipoId.touched && f.tipoId.invalid">
+        <div>
+          <mat-form-field>
+            <mat-label>Limite</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="limite"
+              placeholder="Digite o limite do cartão"
+              required
+              [ngClass]="{
+                'is-invalid': f.limite.errors && f.limite.touched
+              }"
+            />
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.limite.errors?.required"
+            >
               <sup>*</sup>Obrigatório
             </mat-error>
           </mat-form-field>
         </div>
       </mat-card-content>
+
       <mat-divider></mat-divider>
       <mat-card-actions>
         <div fxLayout="row" fxLayoutAlign="space-between center">
+
           <button mat-stroked-button type="button" (click)="retornar()">
             Voltar
           </button>
@@ -99,8 +136,8 @@
             color="primary"
             [disabled]="form.invalid"
           >
-            <mat-icon *ngIf="form.valid">update</mat-icon>
-            Atualizar
+            <mat-icon *ngIf="form.valid">add_card</mat-icon>
+            Adicionar
           </button>
         </div>
       </mat-card-actions>

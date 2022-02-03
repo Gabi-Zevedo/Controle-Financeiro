@@ -70,8 +70,8 @@ export class ListFuncoesComponent implements OnInit {
           .subscribe((resultado) => (this.funcoes.data = resultado));
       }
     }
-    return this.opcoesDeBusca.filter((categoria) =>
-      categoria.toLowerCase().includes(termo.toLowerCase())
+    return this.opcoesDeBusca.filter((funcao) =>
+      funcao.toLowerCase().includes(termo.toLowerCase())
     );
   }
 

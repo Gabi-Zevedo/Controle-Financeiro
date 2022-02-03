@@ -34,7 +34,7 @@
               formControlName="name"
               placeholder="Digite o nome da função"
               required
-              [ngClass]="{'is-invalid': f.name.errors && f.name.touched}"
+              [ngClass]="{ 'is-invalid': f.name.errors && f.name.touched }"
             />
             <mat-error class="invalid-feedback" *ngIf="f.name.errors?.required">
               <sup>*</sup>Obrigatório
@@ -51,9 +51,14 @@
               formControlName="descricao"
               placeholder="Digite descrição"
               required
-              [ngClass]="{'is-invalid': f.descricao.errors && f.descricao.touched}"
+              [ngClass]="{
+                'is-invalid': f.descricao.errors && f.descricao.touched
+              }"
             />
-            <mat-error class="invalid-feedback" *ngIf="f.descricao.errors?.required">
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.descricao.errors?.required"
+            >
               <sup>*</sup>Obrigatório
             </mat-error>
           </mat-form-field>
@@ -61,18 +66,18 @@
       </mat-card-content>
       <mat-divider></mat-divider>
       <mat-card-actions>
-        <div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <button mat-stroked-button type="button" (click)="retornar()">
+            Voltar
+          </button>
           <button
             type="submit"
             mat-stroked-button
             color="primary"
             [disabled]="form.invalid"
           >
-          <mat-icon>done</mat-icon>
-          Salvar
-          </button>
-          <button mat-stroked-button type="button" (click)="retornar()">
-            Voltar
+            <mat-icon *ngIf="form.valid">add_circle_outline</mat-icon>
+            Adicionar
           </button>
         </div>
       </mat-card-actions>

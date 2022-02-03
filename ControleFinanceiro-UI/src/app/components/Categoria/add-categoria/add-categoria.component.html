@@ -10,22 +10,19 @@
       </mat-card-title>
     </mat-card-header>
     <form [formGroup]="form" (ngSubmit)="submitCategoria()">
-
-      <div class="cardErros" *ngIf="erros.length>0">
+      <div class="cardErros" *ngIf="erros.length > 0">
         <mat-card>
           <mat-card-header>
-            <mat-card-title>Algo deu errado
-            </mat-card-title>
+            <mat-card-title>Algo deu errado </mat-card-title>
           </mat-card-header>
           <mat-divider></mat-divider>
           <mat-card-content class="divErros">
             <h4 class="textErros" *ngFor="let erro of erros">
-              {{erro}}
+              {{ erro }}
             </h4>
           </mat-card-content>
         </mat-card>
       </div>
-
 
       <mat-card-content>
         <div>
@@ -37,12 +34,15 @@
               formControlName="nome"
               placeholder="Digite o nome da categoria"
               required
-              [ngClass]="{'is-invalid': f.nome.errors && f.nome.touched}"
+              [ngClass]="{ 'is-invalid': f.nome.errors && f.nome.touched }"
             />
             <mat-error class="invalid-feedback" *ngIf="f.nome.errors?.required">
               <sup>*</sup>Obrigatório
             </mat-error>
-            <mat-error class="invalid-feedback" *ngIf="f.nome.errors?.maxlength">
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.nome.errors?.maxlength"
+            >
               <sup>*</sup>Nome muito grande
             </mat-error>
           </mat-form-field>
@@ -57,18 +57,21 @@
               formControlName="icon"
               placeholder="Digite o codigo do ícone"
               required
-              [ngClass]="{'is-invalid': f.icon.errors && f.icon.touched}"
+              [ngClass]="{ 'is-invalid': f.icon.errors && f.icon.touched }"
             />
             <mat-error class="invalid-feedback" *ngIf="f.icon.errors?.required">
               <sup>*</sup>Obrigatório
             </mat-error>
 
-            <mat-error class="invalid-feedback" *ngIf="f.icon.errors?.maxlength">
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.icon.errors?.maxlength"
+            >
               <sup>*</sup>Nome muito grande
             </mat-error>
           </mat-form-field>
         </div>
-        
+
         <div>
           <mat-form-field>
             <mat-label>Selecione o Tipo</mat-label>
@@ -81,16 +84,24 @@
             <mat-error *ngIf="f.tipoId.touched && f.tipoId.invalid">
               <sup>*</sup>Obrigatório
             </mat-error>
-
           </mat-form-field>
         </div>
-
       </mat-card-content>
       <mat-divider></mat-divider>
       <mat-card-actions>
-        <div>
-          <button type="submit" mat-stroked-button color="primary" [disabled]="form.invalid">Salvar</button>
-          <button mat-stroked-button type="button"  (click)="retornar()">Voltar</button>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <button mat-stroked-button type="button" (click)="retornar()">
+            Voltar
+          </button>
+          <button
+            type="submit"
+            mat-stroked-button
+            color="primary"
+            [disabled]="form.invalid"
+          >
+            <mat-icon *ngIf="form.valid">add_circle_outline</mat-icon>
+            Adicionar
+          </button>
         </div>
       </mat-card-actions>
     </form>

@@ -18,7 +18,7 @@
       }
     },
     "ControleFinanceiro.API": {
-      "commandName": "Project",
+      "commandName": "Project",  
       "dotnetRunMessages": "true",
       "launchBrowser": true,
       "launchUrl": "user/login",

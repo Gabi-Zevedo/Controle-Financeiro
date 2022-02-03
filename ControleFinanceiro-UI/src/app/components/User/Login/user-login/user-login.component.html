@@ -78,7 +78,8 @@
               color="primary"
               [disabled]="form.invalid"
             >
-              Logar
+            <mat-icon *ngIf="form.valid">login</mat-icon>
+            Logar
             </button>
           </div>
 

@@ -1,4 +1,4 @@
-.dadosFuncoes{
+.dadosCartoes{
   padding: 30px 30px 30px 30px;
 }
 
@@ -38,7 +38,8 @@ color: #c0392b;
 
 .divCard {
 padding: 20px;
-width: 600px;
+width: 540px;
+padding-left: 25%;
 }
 
 .cardErros {
@@ -50,4 +51,3 @@ padding-bottom: 30px;
   display: flex;
   justify-content: left;
 }
-
