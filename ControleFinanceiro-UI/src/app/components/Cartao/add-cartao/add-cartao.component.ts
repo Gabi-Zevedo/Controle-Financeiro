@@ -21,6 +21,7 @@ export class AddCartaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.erros = [];
+
     this.validation();
   }
 

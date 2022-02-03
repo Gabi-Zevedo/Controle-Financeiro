@@ -36,7 +36,6 @@ export class ListCartaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.CarregarCartoes();
-    console.log('teste');
 
     this.displayedColumns = this.ExibirColunas();
     this.ExibirFiltro();
