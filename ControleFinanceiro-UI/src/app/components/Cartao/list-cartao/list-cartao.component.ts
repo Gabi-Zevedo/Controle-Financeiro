@@ -89,9 +89,10 @@ export class ListCartaoComponent implements OnInit {
       .afterClosed()
       .subscribe((resultado) => {
         if (resultado === true) {
-          this.cartoesService
-            .GetByUserId(this.userId)
-            .subscribe((dados) => (this.cartoes.data = dados));
+          this.cartoesService.GetByUserId(this.userId).subscribe((dados) => {
+            this.cartoes.data = dados;
+            this.cartoes.paginator = this.paginator;
+          });
           this.displayedColumns = this.ExibirColunas();
         }
       });

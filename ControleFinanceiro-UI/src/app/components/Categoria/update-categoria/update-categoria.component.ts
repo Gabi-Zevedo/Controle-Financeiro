@@ -1,4 +1,4 @@
-import { Categoria } from './../../../models/categoria';
+import { Categoria } from '../../../models/categoria';
 import { TiposService } from './../../../services/tipos.service';
 import { CategoriasService } from './../../../services/categorias.service';
 import { Observable } from 'rxjs';

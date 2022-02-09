@@ -60,5 +60,18 @@ namespace ControleFinanceiro.DAL.Repositories
                 throw new Exception($"Erro: {e.Message}");
             }
         }
+
+        public IQueryable<Categoria> GetCategoriasByTipo(string tipo)
+        {
+            try
+            {
+                return _context.Categorias.Include(c => c.Tipo).Where(c => c.Tipo.Nome == tipo);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception($"Erro: {e.Message}");
+            }
+        }
     }
 }

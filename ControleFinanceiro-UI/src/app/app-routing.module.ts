@@ -13,6 +13,9 @@ import { UserLoginComponent } from './components/User/Login/user-login/user-logi
 import { AddCartaoComponent } from './components/Cartao/add-cartao/add-cartao.component';
 import { ListCartaoComponent } from './components/Cartao/list-cartao/list-cartao.component';
 import { UpdateCartaoComponent } from './components/Cartao/update-cartao/update-cartao.component';
+import { AddDespesasComponent } from './components/Despesa/add-despesas/add-despesas.component';
+import { ListDespesasComponent } from './components/Despesa/list-despesas/list-despesas.component';
+import { UpdateDespesasComponent } from './components/Despesa/update-despesas/update-despesas.component';
 
 const routes: Routes = [
   {
@@ -55,6 +58,18 @@ const routes: Routes = [
       {
         path: 'cartoes/atualizar/:id',
         component: UpdateCartaoComponent,
+      },
+      {
+        path: 'despesas/adicionar',
+        component: AddDespesasComponent,
+      },
+      {
+        path: 'despesas/listagem',
+        component: ListDespesasComponent,
+      },
+      {
+        path: 'despesas/atualizar/:id',
+        component: UpdateDespesasComponent,
       },
     ],
   },

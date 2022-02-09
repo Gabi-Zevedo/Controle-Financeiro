@@ -44,7 +44,7 @@ export class UserLoginComponent implements OnInit {
         localStorage.setItem('UserId', userId);
         localStorage.setItem('User', user);
         localStorage.setItem('Token', token);
-        this.router.navigate(['categorias/listagem']);
+        this.router.navigate(['cartoes/listagem']);
       },
       (err) => {
         if (err.status === 400) {

@@ -17,10 +17,12 @@ namespace ControleFinanceiro.API.Controllers
     public class CartoesController : ControllerBase
     {
         private readonly ICartaoRepository _cartaoRepository;
+        private readonly IDespesaRepository _despesaRepository;
 
-        public CartoesController(ICartaoRepository cartaoRepository)
+        public CartoesController(ICartaoRepository cartaoRepository, IDespesaRepository despesaRepository)
         {
             _cartaoRepository = cartaoRepository;
+            _despesaRepository = despesaRepository;
         }
 
         [HttpGet("GetCartoesByUserId/{userId}")]
@@ -87,6 +89,9 @@ namespace ControleFinanceiro.API.Controllers
             {
                 return NotFound();
             }
+
+            IEnumerable<Despesa> despesas = await _despesaRepository.GetByCartaoId(cartao.CartaoId);
+            _despesaRepository.DeleteDespesas(despesas);
 
             await _cartaoRepository.Delete(cartao);
 

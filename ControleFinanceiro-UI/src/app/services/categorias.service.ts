@@ -1,4 +1,4 @@
-import { Categoria } from './../models/categoria';
+import { Categoria } from '../models/categoria';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -46,6 +46,11 @@ export class CategoriasService {
   }
   FiltrarCategorias(termo: string): Observable<Categoria[]>{
     const apiURL = `${this.url}/filtrarCategorias/${termo}`;
+    return this.http.get<Categoria[]>(apiURL);
+  }
+
+  FiltrarCategoriasDespesas(): Observable<Categoria[]>{
+    const apiURL = `${this.url}/filtrarCategoriasDespesas`;
     return this.http.get<Categoria[]>(apiURL);
   }
 }

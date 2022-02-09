@@ -13,6 +13,8 @@ namespace ControleFinanceiro.DAL.Interfaces
         new Task<Categoria> GetById(int id);
 
         IQueryable<Categoria> FiltrarCategoria(string termo);
+
+        IQueryable<Categoria> GetCategoriasByTipo(string tipo);
     }
 
 
