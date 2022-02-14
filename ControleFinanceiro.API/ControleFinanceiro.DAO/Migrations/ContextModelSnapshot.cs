@@ -89,7 +89,9 @@ namespace ControleFinanceiro.DAL.Migrations
             modelBuilder.Entity("ControleFinanceiro.BLL.Models.Despesa", b =>
                 {
                     b.Property<int>("DespesaId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CartaoId")
                         .HasColumnType("int");
@@ -121,6 +123,8 @@ namespace ControleFinanceiro.DAL.Migrations
                     b.HasKey("DespesaId");
 
                     b.HasIndex("CartaoId");
+
+                    b.HasIndex("CategoriaId");
 
                     b.HasIndex("MonthId");
 
@@ -164,16 +168,16 @@ namespace ControleFinanceiro.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ddea4cab-e322-41f7-9921-96d1b4a49d40",
-                            ConcurrencyStamp = "e85e0ee2-e393-4e09-86cc-75036b553695",
+                            Id = "93c53405-d22a-4d74-b9f9-db4689ae407c",
+                            ConcurrencyStamp = "b55a78d0-f0c7-441d-b160-f607fa29489d",
                             Descricao = "Administrador do Sistema",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "890062c9-75b1-409c-8582-5c137bad35c1",
-                            ConcurrencyStamp = "8058c78d-58da-4004-a537-072f20f9fc62",
+                            Id = "ea6999e3-82e0-4634-a105-d16adb9bd928",
+                            ConcurrencyStamp = "fb25b8e4-c990-46fd-95f0-e4798d817ab4",
                             Descricao = "Usuário do Sistema",
                             Name = "Usuario",
                             NormalizedName = "USUARIO"
@@ -543,15 +547,15 @@ namespace ControleFinanceiro.DAL.Migrations
 
             modelBuilder.Entity("ControleFinanceiro.BLL.Models.Despesa", b =>
                 {
-                    b.HasOne("ControleFinanceiro.BLL.Models.Categoria", "Categoria")
+                    b.HasOne("ControleFinanceiro.BLL.Models.Cartao", "Cartao")
                         .WithMany("Despesas")
                         .HasForeignKey("CartaoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ControleFinanceiro.BLL.Models.Cartao", "Cartao")
+                    b.HasOne("ControleFinanceiro.BLL.Models.Categoria", "Categoria")
                         .WithMany("Despesas")
-                        .HasForeignKey("DespesaId")
+                        .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

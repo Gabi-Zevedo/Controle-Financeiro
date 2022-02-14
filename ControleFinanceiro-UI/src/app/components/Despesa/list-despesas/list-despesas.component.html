@@ -57,17 +57,22 @@
 
       <ng-container matColumnDef="valor">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor</th>
-        <td mat-cell *matCellDef="let despesa">{{ despesa.valor }}</td>
+        <td mat-cell *matCellDef="let despesa">R$: {{ despesa.valor }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="month">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mês</th>
-        <td mat-cell *matCellDef="let despesa">{{ despesa.month }}</td>
+      <ng-container matColumnDef="cartaoId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Cartão</th>
+        <td mat-cell *matCellDef="let despesa">{{ despesa.cartao.nome }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="year">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ano</th>
-        <td mat-cell *matCellDef="let despesa">R$ {{ despesa.year }}</td>
+      <ng-container matColumnDef="categoriaId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</th>
+        <td mat-cell *matCellDef="let despesa"> {{despesa.categoria.nome}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Data</th>
+        <td mat-cell *matCellDef="let despesa">{{ despesa.day }} de {{despesa.month.nome}} de {{despesa.year}}</td>
       </ng-container>
 
       <ng-container matColumnDef="acoes">
@@ -76,12 +81,12 @@
           <button
             mat-icon-button
             color="primary"
-            [routerLink]="['/cartoes/atualizar/', despesa.despesaId]"
+            [routerLink]="['/despesas/atualizar/', despesa.despesaId]"
           >
             <mat-icon>edit</mat-icon>
           </button>
 
-          <button mat-icon-button color="warn" (click)="OpenDialog()">
+          <button mat-icon-button color="warn" (click)="OpenDialog(despesa.despesaId, despesa.descricao)">
             <mat-icon>delete_forever</mat-icon>
           </button>
         </td>

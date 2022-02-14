@@ -24,7 +24,7 @@ namespace ControleFinanceiro.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Month>>> Get()
         {
-            return await _monthRepository.GetAll().ToListAsync();
+            return await _monthRepository.GetAll().OrderBy(m => m.MonthId).ToListAsync();
         }
     }
 }

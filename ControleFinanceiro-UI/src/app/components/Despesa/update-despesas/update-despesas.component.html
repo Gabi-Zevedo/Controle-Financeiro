@@ -1,1 +1,198 @@
-<p>update-despesas works!</p>
+<div *ngIf="!form">
+  <mat-progress-bar mode="buffer"></mat-progress-bar>
+</div>
+
+<div class="divCard" *ngIf="form">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h3>Atualizar Despesa de R$: {{valorDespesa}}</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="form" (ngSubmit)="updateDespesa()">
+      <div class="cardErros" *ngIf="erros.length > 0">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Algo deu errado </mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content class="divErros">
+            <h4 class="textErros" *ngFor="let erro of erros">
+              {{ erro }}
+            </h4>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- campos de cadastro -->
+      <mat-card-content>
+        <div>
+          <mat-form-field>
+            <mat-label>Selecione o Cartão</mat-label>
+            <mat-select
+            formControlName="cartaoId"
+            required
+            [ngClass]="{ 'is-invalid': f.cartaoId.errors && f.cartaoId.touched }">
+            <mat-option *ngFor="let cartao of cartoes" [value]="cartao.cartaoId">
+              {{cartao.nome}}: {{cartao.numero}}
+            </mat-option>
+            </mat-select>
+            <mat-error class="invalid-feedback" *ngIf="f.cartaoId.errors?.required">
+              <sup>*</sup>Obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <mat-label>Descrição</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="descricao"
+              placeholder="Digite a descrição"
+              required
+              [ngClass]="{
+                'is-invalid': f.descricao.errors && f.descricao.touched
+              }"
+            />
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.descricao.errors?.required"
+            >
+              <sup>*</sup>Obrigatório
+            </mat-error>
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.descricao.errors?.maxlength"
+            >
+              <sup>*</sup>Digite uma descrição menor
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <mat-label>Valor</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="valor"
+              placeholder="Digite o Valor R$: "
+              required
+              [ngClass]="{
+                'is-invalid': f.valor.errors && f.valor.touched
+              }"
+            />
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.valor.errors?.required"
+            >
+              <sup>*</sup>Obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <mat-label>Dia</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="day"
+              placeholder="Digite o Dia"
+              required
+              [ngClass]="{
+                'is-invalid': f.day.errors && f.day.touched
+              }"
+            />
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.day.errors?.required"
+            >
+              <sup>*</sup>Obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <mat-label>Selecione o Mês</mat-label>
+            <mat-select
+            formControlName="monthId"
+            required
+            [ngClass]="{ 'is-invalid': f.monthId.errors && f.monthId.touched }">
+            <mat-option *ngFor="let month of months" [value]="month.monthId">
+              {{month.nome}}
+            </mat-option>
+            </mat-select>
+            <mat-error class="invalid-feedback" *ngIf="f.monthId.errors?.required">
+              <sup>*</sup>Obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <mat-label>Ano</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="year"
+              placeholder="Digite o Ano"
+              required
+              [ngClass]="{
+                'is-invalid': f.year.errors && f.year.touched
+              }"
+            />
+            <mat-error
+              class="invalid-feedback"
+              *ngIf="f.year.errors?.required"
+            >
+              <sup>*</sup>Obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div>
+          <mat-form-field>
+            <mat-label>Selecione a Categoria</mat-label>
+            <mat-select
+            formControlName="categoriaId"
+            required
+            [ngClass]="{ 'is-invalid': f.categoriaId.errors && f.categoriaId.touched }">
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria.categoriaId">
+              {{categoria.nome}}
+            </mat-option>
+            </mat-select>
+            <mat-error class="invalid-feedback" *ngIf="f.categoriaId.errors?.required">
+              <sup>*</sup>Obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+
+          <button mat-stroked-button type="button" (click)="retornar()">
+            Voltar
+          </button>
+          <button
+            type="submit"
+            mat-stroked-button
+            color="primary"
+            [disabled]="form.invalid"
+          >
+            <mat-icon *ngIf="form.valid">update</mat-icon>
+            Atualizar
+          </button>
+        </div>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
+
+

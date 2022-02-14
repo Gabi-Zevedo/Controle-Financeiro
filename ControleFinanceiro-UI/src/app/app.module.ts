@@ -57,7 +57,7 @@ import { HeaderComponent } from './components/Dashboard/header/header.component'
 import { AddCartaoComponent } from './components/Cartao/add-cartao/add-cartao.component';
 import { ListCartaoComponent, DialogDeleteCartaoComponent } from './components/Cartao/list-cartao/list-cartao.component';
 import { UpdateCartaoComponent } from './components/Cartao/update-cartao/update-cartao.component';
-import { ListDespesasComponent } from './components/Despesa/list-despesas/list-despesas.component';
+import { ListDespesasComponent,DialogDeleteDespesasComponent } from './components/Despesa/list-despesas/list-despesas.component';
 import { AddDespesasComponent } from './components/Despesa/add-despesas/add-despesas.component';
 import { UpdateDespesasComponent } from './components/Despesa/update-despesas/update-despesas.component';
 
@@ -87,6 +87,7 @@ export function GetUserToken() {
     ListDespesasComponent,
     AddDespesasComponent,
     UpdateDespesasComponent,
+    DialogDeleteDespesasComponent,
   ],
   imports: [
     BrowserModule,

@@ -42,4 +42,10 @@ export class DespesasService {
     return this.http.delete<Despesa>(apiURL,httpOptions);
   }
 
+
+  FiltrarDespesa(termo: string): Observable<Despesa[]>{
+    const apiURL = `${this.url}/filtrarDespesas/${termo}`;
+    return this.http.get<Despesa[]>(apiURL)
+    }
+
 }

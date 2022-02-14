@@ -29,6 +29,18 @@ namespace ControleFinanceiro.DAL.Repositories
             }
         }
 
+        public IQueryable<Despesa> FiltrarDespesa(string termo)
+        {
+            try
+            {
+                return _context.Despesas.Include(d=>d.Cartao).Include(d=>d.Month).Include(d=>d.Categoria).Where(d=> d.Descricao.Contains(termo));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public async Task<IEnumerable<Despesa>> GetByCartaoId(int cartaoId)
         {
             try
@@ -47,7 +59,7 @@ namespace ControleFinanceiro.DAL.Repositories
         {
             try
             {
-                return _context.Despesas.Include(d => d.Cartao).Include(c => c.Categoria).Where(d => d.UserId == userId);
+                return _context.Despesas.Include(d => d.Cartao).Include(c => c.Categoria).Include(c => c.Month).Where(d => d.UserId == userId);
             }
             catch (Exception e)
             {
