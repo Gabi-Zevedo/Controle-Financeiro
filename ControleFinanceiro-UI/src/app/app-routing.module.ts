@@ -16,6 +16,9 @@ import { UpdateCartaoComponent } from './components/Cartao/update-cartao/update-
 import { AddDespesasComponent } from './components/Despesa/add-despesas/add-despesas.component';
 import { ListDespesasComponent } from './components/Despesa/list-despesas/list-despesas.component';
 import { UpdateDespesasComponent } from './components/Despesa/update-despesas/update-despesas.component';
+import { AddGanhosComponent } from './components/Ganhos/add-ganhos/add-ganhos.component';
+import { ListGanhosComponent } from './components/Ganhos/list-ganhos/list-ganhos.component';
+import { UpdateGanhosComponent } from './components/Ganhos/update-ganhos/update-ganhos.component';
 
 const routes: Routes = [
   {
@@ -70,6 +73,18 @@ const routes: Routes = [
       {
         path: 'despesas/atualizar/:id',
         component: UpdateDespesasComponent,
+      },
+      {
+        path: 'ganhos/adicionar',
+        component: AddGanhosComponent,
+      },
+      {
+        path: 'ganhos/listagem',
+        component: ListGanhosComponent,
+      },
+      {
+        path: 'ganhos/atualizar/:id',
+        component: UpdateGanhosComponent,
       },
     ],
   },

@@ -121,6 +121,13 @@ namespace ControleFinanceiro.API.Controllers
             return await _categoriaRepository.GetCategoriasByTipo("Despesa").ToListAsync();
         }
 
+        [HttpGet("filtrarCategoriasganhos")]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Categoria>>> FiltrarCategoriasganhos()
+        {
+            return await _categoriaRepository.GetCategoriasByTipo("Ganho").ToListAsync();
+        }
+
 
     }
 }

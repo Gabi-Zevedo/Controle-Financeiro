@@ -1,3 +1,4 @@
+import { GanhosService } from './services/ganhos.service';
 import { DespesasService } from './services/despesas.service';
 import { CartoesService } from './services/cartoes.service';
 import { FuncoesService } from './services/funcoes.service';
@@ -60,6 +61,9 @@ import { UpdateCartaoComponent } from './components/Cartao/update-cartao/update-
 import { ListDespesasComponent,DialogDeleteDespesasComponent } from './components/Despesa/list-despesas/list-despesas.component';
 import { AddDespesasComponent } from './components/Despesa/add-despesas/add-despesas.component';
 import { UpdateDespesasComponent } from './components/Despesa/update-despesas/update-despesas.component';
+import { ListGanhosComponent, DialogDeleteGanhosComponent } from './components/Ganhos/list-ganhos/list-ganhos.component';
+import { AddGanhosComponent } from './components/Ganhos/add-ganhos/add-ganhos.component';
+import { UpdateGanhosComponent } from './components/Ganhos/update-ganhos/update-ganhos.component';
 
 export function GetUserToken() {
   return localStorage.getItem('Token');
@@ -88,6 +92,10 @@ export function GetUserToken() {
     AddDespesasComponent,
     UpdateDespesasComponent,
     DialogDeleteDespesasComponent,
+    ListGanhosComponent,
+    AddGanhosComponent,
+    UpdateGanhosComponent,
+    DialogDeleteGanhosComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,6 +141,7 @@ export function GetUserToken() {
     AuthGuardService,
     MonthsService,
     UserService,
+    GanhosService,
     HttpClientModule,
   ],
   bootstrap: [AppComponent],

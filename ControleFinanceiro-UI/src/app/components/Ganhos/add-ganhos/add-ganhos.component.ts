@@ -1,23 +1,20 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MonthsService } from './../../../services/months.service';
-import { CategoriasService } from './../../../services/categorias.service';
-import { CartoesService } from './../../../services/cartoes.service';
-import { Month } from './../../../models/Month';
-import { Categoria } from './../../../models/categoria';
-import { Cartao } from 'src/app/models/Cartao';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DespesasService } from './../../../services/despesas.service';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Categoria } from 'src/app/models/categoria';
+import { Month } from 'src/app/models/Month';
+import { CategoriasService } from 'src/app/services/categorias.service';
+import { GanhosService } from 'src/app/services/ganhos.service';
+import { MonthsService } from 'src/app/services/months.service';
 
 @Component({
-  selector: 'app-add-despesas',
-  templateUrl: './add-despesas.component.html',
-  styleUrls: ['../list-despesas/list-despesas.component.css'],
+  selector: 'app-add-ganhos',
+  templateUrl: './add-ganhos.component.html',
+  styleUrls: ['../list-ganhos/list-ganhos.component.css']
 })
-export class AddDespesasComponent implements OnInit {
+export class AddGanhosComponent implements OnInit {
   form: FormGroup;
-  cartoes: Cartao[];
   categorias: Categoria[];
   months: Month[];
   userId: any = localStorage.getItem('UserId');
@@ -26,29 +23,22 @@ export class AddDespesasComponent implements OnInit {
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
-    private despesaService: DespesasService,
-    private cartoesService: CartoesService,
+    private ganhoService: GanhosService,
     private categoriasService: CategoriasService,
     private monthsService: MonthsService
   ) {}
 
   ngOnInit(): void {
-    this.CarregarCartoes();
     this.CarregarCategorias();
     this.CarregarMeses();
     this.validation();
     this.erros = [];
   }
 
-  CarregarCartoes() {
-    this.cartoesService.GetByUserId(this.userId).subscribe((resultado) => {
-      this.cartoes = resultado;
-    });
-  }
 
   CarregarCategorias() {
     this.categoriasService
-      .FiltrarCategoriasDespesas()
+      .FiltrarCategoriasGanhos()
       .subscribe((resultado) => {
         this.categorias = resultado;
       });
@@ -62,7 +52,6 @@ export class AddDespesasComponent implements OnInit {
 
   private validation(): void {
     this.form = new FormGroup({
-      cartaoId: new FormControl(null, [Validators.required]),
       descricao: new FormControl(null, [
         Validators.required,
         Validators.maxLength(50),
@@ -81,14 +70,13 @@ export class AddDespesasComponent implements OnInit {
   }
 
   retornar(): void {
-    this.router.navigate(['despesas/listagem']);
+    this.router.navigate(['ganhos/listagem']);
   }
 
-  submitDespesa() {
-    const despesa = this.form.value;
+  submitGanho() {
+    const ganho = this.form.value;
     this.erros = [];
-
-    this.despesaService.AddDespesa(despesa).subscribe(resultado => {
+    this.ganhoService.AddGanho(ganho).subscribe(resultado => {
       this.retornar();
       this.snackBar.open(resultado.message, '', {
         duration: 2000,
