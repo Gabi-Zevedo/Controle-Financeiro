@@ -64,6 +64,7 @@ import { UpdateDespesasComponent } from './components/Despesa/update-despesas/up
 import { ListGanhosComponent, DialogDeleteGanhosComponent } from './components/Ganhos/list-ganhos/list-ganhos.component';
 import { AddGanhosComponent } from './components/Ganhos/add-ganhos/add-ganhos.component';
 import { UpdateGanhosComponent } from './components/Ganhos/update-ganhos/update-ganhos.component';
+import { UpdateUserComponent } from './components/User/update-user/update-user.component';
 
 export function GetUserToken() {
   return localStorage.getItem('Token');
@@ -96,6 +97,7 @@ export function GetUserToken() {
     AddGanhosComponent,
     UpdateGanhosComponent,
     DialogDeleteGanhosComponent,
+    UpdateUserComponent,
   ],
   imports: [
     BrowserModule,

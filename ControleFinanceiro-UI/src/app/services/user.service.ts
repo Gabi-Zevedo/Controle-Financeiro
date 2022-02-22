@@ -1,3 +1,4 @@
+import { UpdateUser } from './../models/UpdateUser';
 import { DadosLogin } from './../models/DadosLogin';
 import { DadosRegistro } from './../models/DadosRegistro';
 import { Observable } from 'rxjs';
@@ -11,6 +12,13 @@ const httpOptions = {
   }),
 };
 
+
+const httpOptions2 = {
+  headers: new HttpHeaders({
+    'content-type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('Token')}`,
+  }),
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -33,5 +41,19 @@ export class UserService {
   UserLogin(dadosLogin :DadosLogin): Observable<any>{
     const apiURL = `${this.url}/UserLogin`;
     return this.http.post<DadosLogin>(apiURL, dadosLogin)
+  }
+
+  GetUserFoto(id: string): Observable<any>{
+    const apiURL = `${this.url}/GetUserFoto/${id}`;
+    return this.http.get<string>(apiURL);
+  }
+
+  GetUserById(id: string): Observable<UpdateUser>{
+    const apiURL = `${  this.url}/${id}`;
+    return this.http.get<UpdateUser>(apiURL);
+  }
+  UpdateUser(user: UpdateUser): Observable<any>{
+    const apiURL = `${  this.url}/UpdateUser`;
+    return this.http.put<UpdateUser>(apiURL, httpOptions2);
   }
 }

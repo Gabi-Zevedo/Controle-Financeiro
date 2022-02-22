@@ -19,6 +19,7 @@ import { UpdateDespesasComponent } from './components/Despesa/update-despesas/up
 import { AddGanhosComponent } from './components/Ganhos/add-ganhos/add-ganhos.component';
 import { ListGanhosComponent } from './components/Ganhos/list-ganhos/list-ganhos.component';
 import { UpdateGanhosComponent } from './components/Ganhos/update-ganhos/update-ganhos.component';
+import { UpdateUserComponent } from './components/User/update-user/update-user.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,10 @@ const routes: Routes = [
       {
         path: 'ganhos/atualizar/:id',
         component: UpdateGanhosComponent,
+      },
+      {
+        path: 'user/atualizar',
+        component: UpdateUserComponent,
       },
     ],
   },

@@ -57,25 +57,26 @@ export class UpdateDespesasComponent implements OnInit {
         this.categorias = resultado;
       });
 
-      this.despesaService.GetById(this.despesaId).subscribe(resultado => {
-        this.valorDespesa = resultado.valor;
-        this.form = new FormGroup({
-          despesaId: new FormControl(resultado.despesaId),
-          cartaoId: new FormControl(resultado.cartaoId, [Validators.required]),
-          descricao: new FormControl(resultado.descricao, [
-            Validators.required,
-            Validators.maxLength(50),
-          ]),
-          categoriaId: new FormControl(resultado.categoriaId, [Validators.required]),
-          valor: new FormControl(resultado.valor, [Validators.required]),
-          day: new FormControl(resultado.day, [Validators.required]),
-          monthId: new FormControl(resultado.monthId, [Validators.required]),
-          year: new FormControl(resultado.year, [Validators.required]),
-          userId: new FormControl(this.userId),
-        });
-      })
+    this.despesaService.GetById(this.despesaId).subscribe((resultado) => {
+      this.valorDespesa = resultado.valor;
+      this.form = new FormGroup({
+        despesaId: new FormControl(resultado.despesaId),
+        cartaoId: new FormControl(resultado.cartaoId, [Validators.required]),
+        descricao: new FormControl(resultado.descricao, [
+          Validators.required,
+          Validators.maxLength(50),
+        ]),
+        categoriaId: new FormControl(resultado.categoriaId, [
+          Validators.required,
+        ]),
+        valor: new FormControl(resultado.valor, [Validators.required]),
+        day: new FormControl(resultado.day, [Validators.required]),
+        monthId: new FormControl(resultado.monthId, [Validators.required]),
+        year: new FormControl(resultado.year, [Validators.required]),
+        userId: new FormControl(this.userId),
+      });
+    });
   }
-
 
   get f() {
     return this.form.controls;
@@ -85,11 +86,11 @@ export class UpdateDespesasComponent implements OnInit {
     this.router.navigate(['despesas/listagem']);
   }
 
-  updateDespesa(){
+  updateDespesa() {
     const despesa = this.form.value;
     this.erros = [];
-    this.despesaService.UpdateDespesa(this.despesaId, despesa)
-      .subscribe((resultado) => {
+    this.despesaService.UpdateDespesa(this.despesaId, despesa).subscribe(
+      (resultado) => {
         this.router.navigate(['despesas/listagem']);
         this.snackBar.open(resultado.message, '', {
           duration: 2000,
@@ -107,6 +108,5 @@ export class UpdateDespesasComponent implements OnInit {
         }
       }
     );
-
   }
 }

@@ -97,6 +97,7 @@ namespace ControleFinanceiro.API
             services.AddTransient<IValidator<Cartao>, CartaoValidator>();
             services.AddTransient<IValidator<Despesa>, DespesaValidator>();
             services.AddTransient<IValidator<Ganho>, GanhoValidator>();
+            services.AddTransient<IValidator<UpdateUserViewModel>, UpdaterUserViewModelValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

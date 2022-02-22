@@ -93,6 +93,19 @@ namespace ControleFinanceiro.DAL.Repositories
             }
         }
 
+        public async Task UpdateUser(User user)
+        {
+            try
+            {
+                await _userManager.UpdateAsync(user);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
         public async Task UserLogin(User user, bool lembrar)
         {
 

@@ -29,7 +29,7 @@ namespace ControleFinanceiro.API.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(string id)
+        public async Task<ActionResult<UpdateUserViewModel>> GetUser(string id)
         {
             var user = await _userRepository.GetById(id);
 
@@ -37,8 +37,17 @@ namespace ControleFinanceiro.API.Controllers
             {
                 return NotFound();
             }
+            UpdateUserViewModel model = new UpdateUserViewModel
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                CPF = user.CPF,
+                Profissao = user.Profissao,
+                Foto = user.Foto,
+                Email = user.Email,
+            };
 
-            return user;
+            return model;
         }
 
 
@@ -148,6 +157,34 @@ namespace ControleFinanceiro.API.Controllers
 
             return NotFound("Usuario ou Senha inválidos");
         }
+        [HttpGet("GetUserFoto/{userId}")]
+        public async Task<dynamic> GetUserFoto(string userId)
+        {
+            User user = await _userRepository.GetById(userId);
+            return new { image = user.Foto };
+        }
 
+        [HttpPut("UpdateUser")]
+        public async Task<IActionResult> UpdateUser(UpdateUserViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userRepository.GetById(viewModel.Id);
+                user.UserName = viewModel.UserName;
+                user.CPF = viewModel.CPF;
+                user.Profissao = viewModel.Profissao;
+                user.Foto = viewModel.Foto;
+                user.Email = viewModel.Email;
+
+                await _userRepository.UpdateUser(user);
+
+                return Ok(new
+                {
+                    message = $"Usuário {user.UserName} atualizado com sucesso"
+                });
+            }
+
+            return BadRequest(viewModel);
+        }
     }
 }
