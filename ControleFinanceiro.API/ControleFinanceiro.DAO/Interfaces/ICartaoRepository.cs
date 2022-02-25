@@ -11,5 +11,6 @@ namespace ControleFinanceiro.DAL.Interfaces
     {
         IQueryable<Cartao> GetCartoesByUserId(string userId);
         IQueryable<Cartao> FiltrarCartao(string termo);
+        Task<int> GetQtdCartoesByUserId(string userId);
     }
 }

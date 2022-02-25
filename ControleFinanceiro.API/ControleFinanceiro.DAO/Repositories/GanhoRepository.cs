@@ -41,6 +41,18 @@ namespace ControleFinanceiro.DAL.Repositories
             }
         }
 
+        public async Task<double> GetGanhoByUserId(string userId)
+        {
+            try
+            {
+                return await _context.Ganhos.Where(g => g.UserId == userId).SumAsync(g => g.Valor);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         IQueryable<Ganho> IGanhoRepository.GetByUserId(string userId)
         {
             try

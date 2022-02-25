@@ -54,6 +54,6 @@ export class UserService {
   }
   UpdateUser(user: UpdateUser): Observable<any>{
     const apiURL = `${  this.url}/UpdateUser`;
-    return this.http.put<UpdateUser>(apiURL, httpOptions2);
+    return this.http.put<UpdateUser>(apiURL,user, httpOptions2);
   }
 }

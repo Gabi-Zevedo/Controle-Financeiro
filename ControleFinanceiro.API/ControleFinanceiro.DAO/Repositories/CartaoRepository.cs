@@ -1,5 +1,6 @@
 ﻿using ControleFinanceiro.BLL.Models;
 using ControleFinanceiro.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,19 @@ namespace ControleFinanceiro.DAL.Repositories
             try
             {
                 return _context.Cartoes.Where(c => c.UserId == userId);
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        public async Task<int> GetQtdCartoesByUserId(string userId)
+        {
+            try
+            {
+                return await _context.Cartoes.CountAsync(c => c.UserId == userId);
             }
             catch (Exception e)
             {

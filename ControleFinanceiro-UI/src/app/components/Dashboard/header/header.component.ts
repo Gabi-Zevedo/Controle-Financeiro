@@ -20,4 +20,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['user/login'])
   }
 
+  Teste(){
+    this.router.navigate(['cartoes/listagem']);
+  }
+
 }

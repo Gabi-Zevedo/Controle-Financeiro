@@ -1,17 +1,23 @@
 <mat-toolbar color="primary">
-  <span>Controle Financeiro</span>
+  <span>
+    <mat-icon (click)="Teste()" class="teste">home</mat-icon>
+    Controle Financeiro</span
+  >
   <span class="spacer"></span>
 
-  <div *ngIf="loggedUser" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="end center">
-    <div>
-      Olá, {{loggedUser}}
-    </div>
+  <div
+    *ngIf="loggedUser"
+    fxLayout="row"
+    fxLayoutGap="30px"
+    fxLayoutAlign="end center"
+  >
+    <div>Olá, {{ loggedUser }}</div>
 
     <div>
       <button type="button" mat-raised-button (click)="Logout()">
-        <mat-icon >logout</mat-icon>
-        Logout</button>
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
     </div>
-
   </div>
 </mat-toolbar>

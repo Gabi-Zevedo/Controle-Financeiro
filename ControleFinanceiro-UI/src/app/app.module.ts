@@ -1,3 +1,4 @@
+import { DashboardService } from './services/dashboard.service';
 import { GanhosService } from './services/ganhos.service';
 import { DespesasService } from './services/despesas.service';
 import { CartoesService } from './services/cartoes.service';
@@ -56,15 +57,27 @@ import { UserLoginComponent } from './components/User/Login/user-login/user-logi
 import { DashboardComponent } from './components/Dashboard/dashboard/dashboard.component';
 import { HeaderComponent } from './components/Dashboard/header/header.component';
 import { AddCartaoComponent } from './components/Cartao/add-cartao/add-cartao.component';
-import { ListCartaoComponent, DialogDeleteCartaoComponent } from './components/Cartao/list-cartao/list-cartao.component';
+import {
+  ListCartaoComponent,
+  DialogDeleteCartaoComponent,
+} from './components/Cartao/list-cartao/list-cartao.component';
 import { UpdateCartaoComponent } from './components/Cartao/update-cartao/update-cartao.component';
-import { ListDespesasComponent,DialogDeleteDespesasComponent } from './components/Despesa/list-despesas/list-despesas.component';
+import {
+  ListDespesasComponent,
+  DialogDeleteDespesasComponent,
+} from './components/Despesa/list-despesas/list-despesas.component';
 import { AddDespesasComponent } from './components/Despesa/add-despesas/add-despesas.component';
 import { UpdateDespesasComponent } from './components/Despesa/update-despesas/update-despesas.component';
-import { ListGanhosComponent, DialogDeleteGanhosComponent } from './components/Ganhos/list-ganhos/list-ganhos.component';
+import {
+  ListGanhosComponent,
+  DialogDeleteGanhosComponent,
+} from './components/Ganhos/list-ganhos/list-ganhos.component';
 import { AddGanhosComponent } from './components/Ganhos/add-ganhos/add-ganhos.component';
 import { UpdateGanhosComponent } from './components/Ganhos/update-ganhos/update-ganhos.component';
 import { UpdateUserComponent } from './components/User/update-user/update-user.component';
+import { IndexComponent } from './components/Dashboard/index/index.component';
+
+import { ChartsModule } from 'ng2-charts';
 
 export function GetUserToken() {
   return localStorage.getItem('Token');
@@ -98,6 +111,7 @@ export function GetUserToken() {
     UpdateGanhosComponent,
     DialogDeleteGanhosComponent,
     UpdateUserComponent,
+    IndexComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,6 +147,7 @@ export function GetUserToken() {
     MatSidenavModule,
     MatListModule,
     MatToolbarModule,
+    ChartsModule,
   ],
   providers: [
     TiposService,
@@ -145,6 +160,7 @@ export function GetUserToken() {
     UserService,
     GanhosService,
     HttpClientModule,
+    DashboardService,
   ],
   bootstrap: [AppComponent],
 })

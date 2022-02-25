@@ -12,5 +12,6 @@ namespace ControleFinanceiro.DAL.Interfaces
         IQueryable<Ganho> GetByUserId(string userId);
         void DeleteGanhos(IEnumerable<Ganho> ganhos);
         IQueryable<Ganho> FiltrarGanho(string termo);
+        Task<double> GetGanhoByUserId(string userId);
     }
 }

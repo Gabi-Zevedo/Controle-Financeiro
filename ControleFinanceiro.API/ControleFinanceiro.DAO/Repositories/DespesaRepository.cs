@@ -55,6 +55,18 @@ namespace ControleFinanceiro.DAL.Repositories
             }
         }
 
+        public async Task<double> GetDespesaByUserId(string userId)
+        {
+            try
+            {
+                return await _context.Despesas.Where(d => d.UserId == userId).SumAsync(d => d.Valor);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         IQueryable<Despesa> IDespesaRepository.GetByUserId(string userId)
         {
             try

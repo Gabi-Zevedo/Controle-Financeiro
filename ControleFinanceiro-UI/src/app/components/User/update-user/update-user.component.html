@@ -1,6 +1,10 @@
-<div fxLayout="row" fxLayoutAlign="center end" class="formRegistro">
+<div *ngIf="!form">
+  <mat-progress-bar mode="buffer"></mat-progress-bar>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center end" class="formRegistro" *ngIf="form">
   <div class="formDiv">
-    <h1>Atualizar Usuário, {{userName}}</h1>
+    <h1>Atualizar Usuário, {{ userName }}</h1>
     <mat-divider></mat-divider>
 
     <div class="form">
@@ -24,7 +28,6 @@
                   #fileInput
                   name="foto"
                   formControlName="foto"
-                  required
                   (change)="SelecionarFoto($event)"
                 />
                 <br /><br /><br /><br />
@@ -72,18 +75,23 @@
                   }"
                 />
 
-                <mat-error class="invalid-feedback" *ngIf=" f.userName.errors?.required">
+                <mat-error
+                  class="invalid-feedback"
+                  *ngIf="f.userName.errors?.required"
+                >
                   <sup>*</sup> Obrigatótio
                 </mat-error>
 
                 <mat-error
-                  class="invalid-feedback" *ngIf=" f.userName.errors?.minlength"
+                  class="invalid-feedback"
+                  *ngIf="f.userName.errors?.minlength"
                 >
                   <sup>*</sup> Digite mais de 6 caracteres
                 </mat-error>
 
                 <mat-error
-                  class="invalid-feedback" *ngIf=" f.userName.errors?.maxlength"
+                  class="invalid-feedback"
+                  *ngIf="f.userName.errors?.maxlength"
                 >
                   <sup>*</sup> UserName muito longo
                 </mat-error>
@@ -107,22 +115,30 @@
                   }"
                 />
 
-                <mat-error class="invalid-feedback" *ngIf=" f.cpf.errors?.required">
+                <mat-error
+                  class="invalid-feedback"
+                  *ngIf="f.cpf.errors?.required"
+                >
                   <sup>*</sup> Obrigatótio
                 </mat-error>
 
-                <mat-error class="invalid-feedback" *ngIf=" f.cpf.errors?.minlength">
+                <mat-error
+                  class="invalid-feedback"
+                  *ngIf="f.cpf.errors?.minlength"
+                >
                   <sup>*</sup> Digite mais de 1 caracteres
                 </mat-error>
 
-                <mat-error class="invalid-feedback" *ngIf=" f.cpf.errors?.maxlength">
+                <mat-error
+                  class="invalid-feedback"
+                  *ngIf="f.cpf.errors?.maxlength"
+                >
                   <sup>*</sup> cpf muito longo
                 </mat-error>
 
-                <mat-error class="invalid-feedback" *ngIf=" f.cpf.errors?.mask">
+                <mat-error class="invalid-feedback" *ngIf="f.cpf.errors?.mask">
                   <sup>*</sup> cpf inválido
                 </mat-error>
-
               </mat-form-field>
             </div>
 
@@ -142,18 +158,23 @@
                   }"
                 />
 
-                <mat-error class="invalid-feedback" *ngIf=" f.profissao.errors?.required">
+                <mat-error
+                  class="invalid-feedback"
+                  *ngIf="f.profissao.errors?.required"
+                >
                   <sup>*</sup> Obrigatótio
                 </mat-error>
 
                 <mat-error
-                  class="invalid-feedback" *ngIf=" f.profissao.errors?.minlength"
+                  class="invalid-feedback"
+                  *ngIf="f.profissao.errors?.minlength"
                 >
                   <sup>*</sup> Digite mais de 1 caracteres
                 </mat-error>
 
                 <mat-error
-                  class="invalid-feedback" *ngIf=" f.profissao.errors?.maxlength"
+                  class="invalid-feedback"
+                  *ngIf="f.profissao.errors?.maxlength"
                 >
                   <sup>*</sup> profissão muito longa
                 </mat-error>
@@ -176,15 +197,24 @@
                   }"
                 />
 
-                <mat-error class="invalid-feedback" *ngIf=" f.email.errors?.required">
+                <mat-error
+                  class="invalid-feedback"
+                  *ngIf="f.email.errors?.required"
+                >
                   <sup>*</sup> Obrigatótio
                 </mat-error>
 
-                <mat-error class="invalid-feedback" *ngIf=" f.email.errors?.maxlength">
+                <mat-error
+                  class="invalid-feedback"
+                  *ngIf="f.email.errors?.maxlength"
+                >
                   <sup>*</sup> e-mail muito longo
                 </mat-error>
 
-                <mat-error class="invalid-feedback" *ngIf=" f.email.errors?.email || f.email.errors?.minlength">
+                <mat-error
+                  class="invalid-feedback"
+                  *ngIf="f.email.errors?.email || f.email.errors?.minlength"
+                >
                   <sup>*</sup> e-mail inválido
                 </mat-error>
               </mat-form-field>
@@ -199,17 +229,16 @@
           fxLayoutAlign="end center"
           class="botoes"
         >
-
-        <div>
-          <button
-            type="submit"
-            mat-stroked-button
-            color="accent"
-            (click)="retornar()"
-          >
-            Voltar
-          </button>
-        </div>
+          <div>
+            <button
+              type="submit"
+              mat-stroked-button
+              color="accent"
+              (click)="retornar()"
+            >
+              Voltar
+            </button>
+          </div>
 
           <div>
             <button

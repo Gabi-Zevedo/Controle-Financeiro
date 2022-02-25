@@ -13,5 +13,6 @@ namespace ControleFinanceiro.DAL.Interfaces
         void DeleteDespesas(IEnumerable<Despesa> despesas);
         IQueryable<Despesa> FiltrarDespesa(string termo);
         Task<IEnumerable<Despesa>> GetByCartaoId(int cartaoId);
+        Task<double> GetDespesaByUserId(string userId);
     }
 }

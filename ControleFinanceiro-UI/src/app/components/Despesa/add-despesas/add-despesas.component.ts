@@ -81,7 +81,7 @@ export class AddDespesasComponent implements OnInit {
   }
 
   retornar(): void {
-    this.router.navigate(['despesas/listagem']);
+    this.router.navigate(['dashboard/index']);
   }
 
   submitDespesa() {

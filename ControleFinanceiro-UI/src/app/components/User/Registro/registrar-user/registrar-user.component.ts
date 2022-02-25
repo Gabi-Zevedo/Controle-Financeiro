@@ -99,7 +99,7 @@ export class RegistrarUserComponent implements OnInit {
           localStorage.setItem('UserId', userId);
           localStorage.setItem('User', user);
           localStorage.setItem('Token', token);
-          this.router.navigate(['cartoes/listagem']);
+          this.router.navigate(['dashboard/index']);
           this.snackBar.open(dados.message, '', {
             duration: 2000,
             horizontalPosition: 'right',

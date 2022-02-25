@@ -9,5 +9,6 @@ namespace ControleFinanceiro.DAL.Interfaces
 {
     public interface IMonthRepository : IGenericRepository<Month>
     {
+        new IQueryable<Month> GetAll();
     }
 }

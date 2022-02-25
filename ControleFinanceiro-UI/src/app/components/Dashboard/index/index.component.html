@@ -1,0 +1,107 @@
+<div class="dashboard">
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div>
+      <mat-card>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-around center"
+          fxLayoutGap="20px"
+        >
+          <div fxFlex="40">
+            <mat-icon style="font-size: 50px">credit_card</mat-icon>
+          </div>
+          <div fxFlex="5">
+            <b style="color: blue; border-color: black; font-size: 40px">{{
+              qtdCartoes
+            }}</b>
+          </div>
+          <div fxFlex="55" style="margin-left: 0%">Cartões cadastrados</div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div>
+      <mat-card>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-around center"
+          fxLayoutGap="20px"
+        >
+          <div fxFlex="40">
+            <mat-icon style="font-size: 50px">trending_up</mat-icon>
+          </div>
+          <div fxFlex="60">
+            Ganhos
+            <b style="color: green; border-color: black; font-size: 16px"
+              >R$ {{ ganhoTotal }}</b
+            >
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div>
+      <mat-card>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-around center"
+          fxLayoutGap="20px"
+        >
+          <div fxFlex="40">
+            <mat-icon style="font-size: 50px">trending_down</mat-icon>
+          </div>
+          <div fxFlex="60">
+            Despesas
+            <b style="color: red; border-color: black; font-size: 16px"
+              >R$ {{ despesaTotal }}</b
+            >
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div>
+      <mat-card>
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-around center"
+          fxLayoutGap="20px"
+        >
+          <div fxFlex="40">
+            <mat-icon style="font-size: 50px">account_balance</mat-icon>
+          </div>
+          <div fxFlex="60">
+            Saldo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b
+              *ngIf="isPositivo()"
+              style="color: green; border-color: black; font-size: 16px"
+              >R$ {{ saldo }}</b
+            >
+            <b
+              *ngIf="!isPositivo()"
+              style="color: red; border-color: black; font-size: 16px"
+              >R$ {{ saldo }}</b
+            >
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="years" class="years" fxLayout="row" fxLayoutAlign="center end">
+  <mat-form-field appearance="outline">
+    <mat-label>Selecione o Ano</mat-label>
+    <mat-select #selectedYear [(ngModel)]="atualYear" (selectionChange)="CarregarGrafico(selectedYear.value)"
+      ><mat-option *ngFor="let year of years" [value]="year">
+        {{ year }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="grafico" *ngIf="dados" height="400" width="450">
+  <canvas baseChart [datasets]="dados" [labels]="labels" [options]="options" [plugins]="plugins" [chartType]="tipo">
+
+  </canvas>
+</div>

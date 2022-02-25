@@ -27,9 +27,14 @@ export class UpdateUserComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {}
 
+
+  get f() {
+    return this.form.controls;
+  }
+
   ngOnInit(): void {
-    this.erros = [];
     this.CarregarUser();
+    this.erros = [];
   }
 
   CarregarUser() {
@@ -71,11 +76,6 @@ export class UpdateUserComponent implements OnInit {
     });
   }
 
-
-  get f() {
-    return this.form.controls;
-  }
-
   SelecionarFoto(fileInput: any) {
     this.foto = fileInput.target.files[0] as File;
     const reader = new FileReader();
@@ -88,7 +88,7 @@ export class UpdateUserComponent implements OnInit {
   }
 
   retornar() {
-    this.router.navigate(['/cartoes/listagem']);
+    this.router.navigate(['dashboard/index']);
   }
 
   SubmitUser() {
