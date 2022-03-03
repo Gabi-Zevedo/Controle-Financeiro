@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { UpdateUser } from './../../../models/UpdateUser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
@@ -14,8 +15,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class UpdateUserComponent implements OnInit {
   form!: FormGroup;
   userId: any = localStorage.getItem('UserId');
-  userName: string;
   imageURL: SafeResourceUrl;
+  userName: string;
   foto: File;
   fotoAntiga: File;
   erros: string[];
@@ -24,7 +25,8 @@ export class UpdateUserComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private sanitizer: DomSanitizer,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private spinner: NgxSpinnerService
   ) {}
 
 
@@ -94,6 +96,7 @@ export class UpdateUserComponent implements OnInit {
   SubmitUser() {
     const user = this.form.value;
     this.erros = [];
+    this.spinner.show();
 
     if (this.foto != null) {
       const formData: FormData = new FormData();
@@ -110,7 +113,8 @@ export class UpdateUserComponent implements OnInit {
 
         this.userService.UpdateUser(updateUser).subscribe(
           (resultadoUpdate) => {
-            this.router.navigate(['/cartoes/listagem']);
+            this.router.navigate(['dashboard/index'])
+            window.location.reload();
             this.snackBar.open(resultadoUpdate.message, '', {
               duration: 2000,
               horizontalPosition: 'right',
@@ -129,7 +133,8 @@ export class UpdateUserComponent implements OnInit {
               this.erros.push('Erro ao salvar a foto');
             }
           }
-        );
+        )
+        .add(()=>this.spinner.hide());
       });
     } else {
       const updateUser: UpdateUser = new UpdateUser();
@@ -142,7 +147,7 @@ export class UpdateUserComponent implements OnInit {
 
       this.userService.UpdateUser(updateUser).subscribe(
         (resultadoUpdate) => {
-          this.router.navigate(['/cartoes/listagem']);
+          this.router.navigate(['dashboard/index'])
           this.snackBar.open(resultadoUpdate.message, '', {
             duration: 2000,
             horizontalPosition: 'right',
@@ -158,7 +163,8 @@ export class UpdateUserComponent implements OnInit {
             }
           }
         }
-      );
+      )
+      .add(()=>this.spinner.hide());
     }
   }
 }

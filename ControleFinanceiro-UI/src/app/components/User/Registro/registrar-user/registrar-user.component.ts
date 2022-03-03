@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { DadosRegistro } from './../../../../models/DadosRegistro';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -18,7 +19,8 @@ export class RegistrarUserComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit(): void {
@@ -75,7 +77,7 @@ export class RegistrarUserComponent implements OnInit {
     const user = this.form.value;
     const formData: FormData = new FormData();
     this.erros = [];
-
+    this.spinner.show();
     if (this.foto != null) {
       formData.append('file', this.foto, this.foto.name);
     }
@@ -92,16 +94,16 @@ export class RegistrarUserComponent implements OnInit {
       this.userService.CreateUser(dadosRegistro).subscribe(
         (dados) => {
           const loggedUser = dados.loggedUser;
-          const userId = resultado.userId;
-          const user = resultado.user;
-          const token = resultado.userToken;
+          const userId = dados.userId;
+          const user = dados.user;
+          const token = dados.userToken;
           localStorage.setItem('LoggedUser', loggedUser);
           localStorage.setItem('UserId', userId);
           localStorage.setItem('User', user);
           localStorage.setItem('Token', token);
           this.router.navigate(['dashboard/index']);
           this.snackBar.open(dados.message, '', {
-            duration: 2000,
+            duration: 5000,
             horizontalPosition: 'right',
             verticalPosition: 'top',
           });
@@ -116,6 +118,7 @@ export class RegistrarUserComponent implements OnInit {
           }
         }
       );
-    });
+    })
+    .add(() => this.spinner.hide());
   }
 }

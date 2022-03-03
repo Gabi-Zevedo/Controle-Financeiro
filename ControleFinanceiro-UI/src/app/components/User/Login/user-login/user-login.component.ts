@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from 'src/app/services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,11 @@ export class UserLoginComponent implements OnInit {
   form!: FormGroup;
   erros: string[];
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
     this.erros = [];
@@ -33,30 +38,35 @@ export class UserLoginComponent implements OnInit {
   SubmmitUser() {
     this.erros = [];
     const dadosLogin = this.form.value;
+    this.spinner.show();
 
-    this.userService.UserLogin(dadosLogin).subscribe(
-      (resultado) => {
-        const loggedUser = resultado.loggedUser;
-        const userId = resultado.userId;
-        const user = resultado.user;
-        const token = resultado.userToken;
-        localStorage.setItem('LoggedUser', loggedUser);
-        localStorage.setItem('UserId', userId);
-        localStorage.setItem('User', user);
-        localStorage.setItem('Token', token);
-        this.router.navigate(['dashboard/index']);
-      },
-      (err) => {
-        if (err.status === 400) {
-          for (const campo in err.error.errors) {
-            if (err.error.errors.hasOwnProperty(campo)) {
-              this.erros.push(err.error.errors[campo]);
+    this.userService
+      .UserLogin(dadosLogin)
+      .subscribe(
+        (resultado) => {
+          const loggedUser = resultado.loggedUser;
+          const userId = resultado.userId;
+          const user = resultado.user;
+          const token = resultado.userToken;
+          localStorage.setItem('LoggedUser', loggedUser);
+          localStorage.setItem('UserId', userId);
+          localStorage.setItem('User', user);
+          localStorage.setItem('Token', token);
+          this.router.navigate(['dashboard/index']);
+          this.spinner.hide();
+        },
+        (err) => {
+          if (err.status === 400) {
+            for (const campo in err.error.errors) {
+              if (err.error.errors.hasOwnProperty(campo)) {
+                this.erros.push(err.error.errors[campo]);
+              }
             }
+          } else {
+            this.erros.push(err.error);
           }
-        } else {
-          this.erros.push(err.error);
         }
-      }
-    );
+      )
+      .add(() => this.spinner.hide());
   }
 }

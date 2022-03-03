@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { DashboardService } from './../../../services/dashboard.service';
 import { Component, OnInit } from '@angular/core';
@@ -34,11 +35,11 @@ export class IndexComponent implements OnInit {
   plugins = [];
   tipo: ChartType = "line";
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService, private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
     this.CarregarDadosPagina();
-    this.CarregarDadosGrafico();
+    this.CarregarGrafico(this.atualYear);
   }
 
   CarregarDadosPagina() {
@@ -55,131 +56,13 @@ export class IndexComponent implements OnInit {
 
 
   }
-
-  CarregarYears(anoInicial: number, anoAtual: number): number[] {
-    const years = [];
-    while (anoInicial <= anoAtual) {
-      years.push(anoInicial);
-      anoInicial = anoInicial + 1;
-    }
-    return years;
-  }
-
-  GetMonths(monthsData: any): string[]{
-    const months =[];
-    let indice = 0;
-    const qtdMonths = monthsData.length;
-
-    while (indice < qtdMonths) {
-      months.push(monthsData[indice].nome);
-      indice = indice + 1;
-    }
-    return months;
-  }
-
-  CarregarDadosGrafico(){
-    this.dashboardService
-    .GetYearDataByUserId(this.userId, this.atualYear)
-    .subscribe((resultado) => {
-
-      this.labels = this.GetMonths(resultado.months);
-
-      this.dados = [
-        {
-          data: this.GetValoresGanhos(resultado.months, resultado.ganhos),
-          label: 'Ganho de R$',
-          fill: false,
-          borderColor: '#27ae60',
-          backgroundColor: '#27ae60',
-          pointBackgroundColor: '#27ae60',
-          pointHoverBackgroundColor: '#27ae60',
-          pointHoverBorderColor: '#27ae60',
-        },
-        {
-          data: this.GetValoresDespesas(resultado.months, resultado.despesas),
-          label: 'Despesa de R$',
-          fill: false,
-          borderColor: '#c0392b',
-          backgroundColor: '#c0392b',
-          pointBackgroundColor: '#c0392b',
-          pointHoverBackgroundColor: '#c0392b',
-          pointHoverBorderColor: '#c0392b',
-        },
-      ];
-
-      console.log(this.dados);
-
-    });
-  }
-
-  GetValoresGanhos(monthsData: any, ganhosData: any): number[]{
-    const valores = [];
-    let indiceMonths = 0;
-    let indiceGanhos = 0;
-    const qtdMonths = monthsData.length;
-    const qtdGanhos = ganhosData.length;
-
-    while (indiceMonths <= qtdMonths - 1) {
-      if (indiceGanhos <= qtdGanhos - 1) {
-        if (ganhosData[indiceGanhos].monthId === monthsData[indiceMonths].monthId) {
-          valores.push(ganhosData[indiceGanhos].valores);
-          indiceGanhos = indiceGanhos +1;
-          indiceMonths = indiceMonths +1;
-        }
-
-        else{
-          valores.push(0);
-          indiceMonths = indiceMonths + 1;
-        }
-      }
-
-      else{
-        valores.push(0);
-        indiceMonths = indiceMonths + 1;
-      }
-    }
-    return valores;
-  }
-
-  GetValoresDespesas(monthsData: any, despesasData: any){
-    const valores = [];
-    let indiceMonths = 0;
-    let indiceDespesas = 0;
-    const qtdMonths = monthsData.length;
-    const qtdDespesas = despesasData.length;
-
-    while (indiceMonths <= qtdMonths - 1) {
-      if (indiceDespesas <= qtdDespesas - 1) {
-        if (despesasData[indiceDespesas].monthId === monthsData[indiceMonths].monthId) {
-          valores.push(despesasData[indiceDespesas].valores);
-          indiceDespesas++;
-          indiceMonths++;
-        }
-
-        else{
-          valores.push(0);
-          indiceMonths++;
-        }
-      }
-
-      else{
-        valores.push(0);
-        indiceMonths++;
-      }
-    }
-    return valores;
-  }
-
-  isPositivo(): boolean {
-    return this.saldo >= 0;
-  }
-
   CarregarGrafico(selectedYear: number){
     this.dashboardService
       .GetYearDataByUserId(this.userId, selectedYear)
       .subscribe((resultado) => {
 
         this.labels = this.GetMonths(resultado.months);
+
 
         this.dados = [
           {
@@ -205,4 +88,91 @@ export class IndexComponent implements OnInit {
         ];
       });
   }
+
+  CarregarYears(anoInicial: number, anoAtual: number): number[] {
+    const years = [];
+    while (anoInicial <= anoAtual) {
+      years.push(anoInicial);
+      anoInicial = anoInicial + 1;
+    }
+    return years;
+  }
+
+  GetMonths(monthsData: any): string[]{
+    const months =[];
+    let indice = 0;
+    const qtdMonths = monthsData.length;
+
+    while (indice < qtdMonths) {
+      months.push(monthsData[indice].nome);
+      indice = indice + 1;
+    }
+    return months;
+  }
+
+
+  GetValoresGanhos(monthsData: any, ganhosData: any): number[]{
+    const valores = [];
+    let indiceMonths = 0;
+    let indiceGanhos = 0;
+    const qtdMonths = monthsData.length;
+    const qtdGanhos = ganhosData.length;
+
+
+    while (indiceMonths <= qtdMonths - 1) {
+      if (indiceGanhos <= qtdGanhos - 1) {
+        if (ganhosData[indiceGanhos].monthId === monthsData[indiceMonths].monthId) {
+          valores.push(ganhosData[indiceGanhos].valorTotal);
+
+          indiceGanhos++;
+          indiceMonths++;
+        }
+
+        else{
+          valores.push(0);
+          indiceMonths++;
+        }
+      }
+
+      else{
+        valores.push(0);
+        indiceMonths++;
+      }
+    }
+    return valores;
+  }
+
+  GetValoresDespesas(monthsData: any, despesasData: any){
+    const valores = [];
+    let indiceMonths = 0;
+    let indiceDespesas = 0;
+    const qtdMonths = monthsData.length;
+    const qtdDespesas = despesasData.length;
+
+    while (indiceMonths <= qtdMonths - 1) {
+      if (indiceDespesas <= qtdDespesas - 1) {
+        if (despesasData[indiceDespesas].monthId === monthsData[indiceMonths].monthId) {
+          valores.push(despesasData[indiceDespesas].valorTotal);
+          indiceDespesas++;
+          indiceMonths++;
+        }
+
+        else{
+          valores.push(0);
+          indiceMonths++;
+        }
+      }
+
+      else{
+        valores.push(0);
+        indiceMonths++;
+      }
+    }
+    return valores;
+  }
+
+  isPositivo(): boolean {
+    return this.saldo >= 0;
+  }
+
 }

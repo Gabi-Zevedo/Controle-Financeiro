@@ -1,9 +1,12 @@
 <mat-toolbar color="primary">
-  <span>
-    <mat-icon (click)="Teste()" class="teste">home</mat-icon>
-    Controle Financeiro</span
-  >
+  <span> Controle Financeiro</span>
   <span class="spacer"></span>
+  <!-- <div>
+    <button type="button" mat-raised-button (click)="showSpinner()">
+      <mat-icon>lock</mat-icon>
+      Spinner
+    </button>
+  </div> -->
 
   <div
     *ngIf="loggedUser"
@@ -11,7 +14,20 @@
     fxLayoutGap="30px"
     fxLayoutAlign="end center"
   >
-    <div>Olá, {{ loggedUser }}</div>
+  <div>
+    <img
+      class="img"
+      [src]="imageURL"
+      width="40"
+      height="40"
+      (click)="AtualizarUsuario()"
+      style="cursor: pointer;border-radius: 50%;"
+    /></div>
+    
+    <div>
+      Olá, {{ loggedUser }}
+    </div>
+
 
     <div>
       <button type="button" mat-raised-button (click)="Logout()">

@@ -112,7 +112,8 @@ namespace ControleFinanceiro.API.Controllers
                         loggedEmail = user.Email,
                         userId = user.Id,
                         user = user.UserName,
-                        userToken = token
+                        userToken = token,
+                        message = $"Usuário cadastrado com sucesso, bem vindo {user.UserName}"
                     });
                 }
                 else

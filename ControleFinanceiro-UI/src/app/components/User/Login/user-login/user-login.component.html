@@ -32,9 +32,12 @@
               required
               maxlength="50"
               minlength="10"
-              [ngClass]="{'is-invalid': f.email.errors && f.email.touched}"
+              [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched }"
             />
-            <mat-error *ngIf="f.email.errors?.required" class="invalid-feedback">
+            <mat-error
+              *ngIf="f.email.errors?.required"
+              class="invalid-feedback"
+            >
               <sup>*</sup> Obrigatório
             </mat-error>
 
@@ -54,11 +57,15 @@
               placeholder="Digite a Senha"
               required
               minlength="6"
-              maxlength="50"[ngClass]="{
+              maxlength="50"
+              [ngClass]="{
                 'is-invalid': f.email.errors && f.email.touched
               }"
             />
-            <mat-error *ngIf="f.senha.errors?.required && f.senha.touched" class="invalid-feedback">
+            <mat-error
+              *ngIf="f.senha.errors?.required && f.senha.touched"
+              class="invalid-feedback"
+            >
               <sup>*</sup> Obrigatório
             </mat-error>
           </mat-form-field>
@@ -78,11 +85,10 @@
               color="primary"
               [disabled]="form.invalid"
             >
-            <mat-icon *ngIf="form.valid">login</mat-icon>
-            Logar
+              <mat-icon *ngIf="form.valid">login</mat-icon>
+              Logar
             </button>
           </div>
-
           <div>
             <button
               type="button"

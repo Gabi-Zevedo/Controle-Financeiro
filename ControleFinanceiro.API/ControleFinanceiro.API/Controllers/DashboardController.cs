@@ -51,12 +51,14 @@ namespace ControleFinanceiro.API.Controllers
         [HttpGet("GetYearDataByUserId/{userid}/{year}")]
         public object GetYearDataByUserId(string userId, int year)
         {
-            return (new
+            var obj = new
             {
                 ganhos = _graficoRepository.GetYearGanhosByUserId(userId, year),
                 despesas = _graficoRepository.GetYearDespesasByUserId(userId, year),
                 months = _monthRepository.GetAll()
-            });
+            };
+
+            return (obj);
         }
     }
 

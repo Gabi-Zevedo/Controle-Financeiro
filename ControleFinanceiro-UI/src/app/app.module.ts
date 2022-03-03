@@ -9,7 +9,9 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { MonthsService } from './services/months.service';
 import { UserService } from './services/user.service';
 
-import { NgModule } from '@angular/core';
+
+
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,6 +37,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NgxMaskModule } from 'ngx-mask';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -148,6 +152,7 @@ export function GetUserToken() {
     MatListModule,
     MatToolbarModule,
     ChartsModule,
+    NgxSpinnerModule,
   ],
   providers: [
     TiposService,
@@ -163,5 +168,7 @@ export function GetUserToken() {
     DashboardService,
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  // exports:[NgxSpinnerModule],
 })
 export class AppModule {}
